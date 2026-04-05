@@ -1,0 +1,44 @@
+{
+    "name": "Мотя Чат",
+    "short_name": "Мотя Чат",
+    "description": "Мотя Чат — современный мессенджер, вдохновлённый Telegram, с поддержкой чатов в реальном времени, удобной архитектурой и высокой производительностью.",
+    "lang": "ru-RU",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#14181B",
+    "theme_color": "#14181B",
+    "icons": [
+        {
+            "src": "/favicon/favicon-16x16.png",
+            "type": "image/png",
+            "sizes": "16x16"
+        },
+        {
+            "src": "/favicon/favicon-32x32.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        },
+        {
+            "src": "/favicon.ico",
+            "type": "image/x-icon",
+            "sizes": "64x64"
+        },
+        {
+            "src": "/favicon/favicon-120x120.png",
+            "type": "image/png",
+            "sizes": "120x120"
+        },
+        {
+            "src": "/favicon/favicon-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "communication",
+        "social"
+    ]
+}

@@ -1,0 +1,4 @@
+.searchbar {
+    padding: var(--gap-3);
+    border-bottom: 1px var(--border-accent) solid;
+}

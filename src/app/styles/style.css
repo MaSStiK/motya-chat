@@ -1,0 +1,66 @@
+@import "./base/typography.css";
+@import "./base/flex.css";
+@import "./base/elements.css";
+
+@import "./UI/button.css";
+@import "./UI/input.css";
+@import "./UI/input-radio.css";
+@import "./UI/input-checkbox.css";
+@import "./UI/select.css";
+
+:root {
+    /* Основные цвета */
+    --bg-primary:     #24182C; /* Фон Main */
+    --bg-secondary:   #220C0C; /* Фон Sidebar */
+    --bg-accent:      #301615; /* Акцентный цвет (для фона инпута) */
+    --bg-transparent: #0E1113CC; /* Пока не используется (для анимации загрузки поверх контента) */
+
+    /* Бордеры */
+    --border-primary:   #1F2937; /* Header и Sidebar */
+    --border-secondary: #3F4143; /* Внутри контента */
+    --border-accent:    #ee3f4827;
+    /* rgba(255, 182, 193, 0.2) */
+
+    --border-radius: 14px;
+    --border-radius-small: 10px;
+
+    /* Ширина scrollbar */
+    --scrollbar-width: 6px;
+}
+
+/* Мобильная версия */
+@media screen and (max-width: 900px) {
+    /* Полоса прокрутки тоньше на телефоне */
+    :root {
+        --scrollbar-width: 4px
+    }
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+
+    box-sizing: border-box;
+    list-style-type: none;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+}
+
+
+/* Полоса прокрутки */
+*::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+}
+
+/* Задний фон полосы прокрутки */
+*::-webkit-scrollbar-track {
+    border-radius: var(--border-radius);
+    background-color: transparent;
+}
+
+/* Маркер прокрутки */
+*::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius);
+    background-color: var(--border-secondary);
+}

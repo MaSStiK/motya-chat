@@ -1,0 +1,36 @@
+:root {
+    /* Отступы между и внутри блоков */
+    --gap-1: 4px;
+    --gap-2: 8px;
+    --gap-3: 12px;
+    --gap-4: 16px;
+    --gap-5: 20px;
+    --gap-6: 24px;
+    --gap-7: 28px;
+    --gap-8: 32px;
+}
+
+/* Флекс строка */
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Флекс колонна */
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Флекс перенос строки */
+.flex-wrap { flex-wrap: wrap; }
+
+/* Отступы между и внутри блоков */
+.gap-1 { gap: var(--gap-1); }
+.gap-2 { gap: var(--gap-2); }
+.gap-3 { gap: var(--gap-3); }
+.gap-4 { gap: var(--gap-4); }
+.gap-5 { gap: var(--gap-5); }
+.gap-6 { gap: var(--gap-6); }
+.gap-7 { gap: var(--gap-7); }
+.gap-8 { gap: var(--gap-8); }

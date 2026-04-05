@@ -1,0 +1,29 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* layout имеет sidebar и main */
+#layout {
+    height: 100%;
+    display: flex;
+}
+
+/* В main расположен чат с сообщениями */
+main {
+    width: calc(100% - var(--sidebar-width));
+    height: 100%;
+    padding: var(--gap-5);
+    background-color: var(--bg-primary);
+
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+}
+
+/* CSS for other than iOS devices */ 
+@supports not (-webkit-touch-callout: none) {
+    main {
+        overflow-y: overlay; /* Scroll поверх */
+    }
+}

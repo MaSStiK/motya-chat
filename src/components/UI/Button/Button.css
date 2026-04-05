@@ -1,0 +1,28 @@
+:is(button, .button).ui-button {
+    width: fit-content; /* Ширина кнопки зависит от контента и обтягивает его*/
+    min-width: var(--button-height); 
+    gap: var(--gap-1);
+}
+
+/* Иконка в кнопке чуть меньше кнопки */
+:is(button, .button).ui-button img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Маленький текст */
+:is(button, .button).ui-button.button--small span { font-size: var(--fs-small); }
+
+/* Скругленные углы */
+:is(button, .button).ui-button.button--round { border-radius: 18px; padding: var(--gap-1) 8px; }
+
+/* Во всю ширину контейнера */
+:is(button, .button).ui-button.button--width100 { width: 100%; }
+
+/* Контент кнопки слева, а не по центру */
+:is(button, .button).ui-button.button--atStart { justify-content: flex-start; }
+
+/* Модификатор для мобильного скрытия текста */
+@media screen and (max-width: 400px) { 
+    :is(button, .button).ui-button.button--phoneTextHide span { display: none; }
+}
