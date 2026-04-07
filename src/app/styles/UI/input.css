@@ -11,7 +11,7 @@
 }
 
 /* Основные стили для инпута и textarea */
-input[type=text], textarea, .textarea {
+:where(input[type="text"], input[type="email"], input[type="password"], textarea, .textarea) {
     display: block;
     width: 100%;
     height: var(--input-height);
@@ -29,7 +29,7 @@ input[type=text], textarea, .textarea {
     transition: all 0.15s ease;
 }
 
-/* Стили только для textarea */
+/* Только textarea */
 textarea {
     height: calc(var(--input-height) * 3); /* Высота по умолчанию */
     min-height: var(--input-height); /* Минимальный размер равен размеру инпута */
@@ -37,58 +37,55 @@ textarea {
     resize: vertical; /* Растягивание только по вертикале */
 }
 
-
-/* Текст стилизованный под textarea */
+/* Текстовый блок под textarea */
 .textarea {
     height: auto;
-    padding: var(--gap-1); /* Вертикальный отступ такой же как и горизонтальный */
+    padding: var(--gap-1);
     white-space: pre-wrap;
     color: var(--text-light);
     cursor: not-allowed;
 }
 
-
-/* Неизменяемые input и textarea помечаем серым цветом */
-:is(input[type=text], textarea):is(:read-only, :disabled) {
+/* read-only / disabled input */
+:where(input[type="text"], input[type="email"], input[type="password"]):is(:read-only, :disabled) {
     color: var(--text-gray);
     cursor: not-allowed;
 }
 
-/* Неизменяемые textarea, делаем его минимального размера и неизменяемым по высоте */
+/* read-only / disabled textarea */
 textarea:is(:read-only, :disabled) {
     height: auto;
     min-height: var(--input-height);
     max-height: unset;
     resize: none; /* Отключаем растягивание */
+    color: var(--text-gray);
+    cursor: not-allowed;
 }
 
-
-/* При фокусе input или textarea (Кроме неизменяемых) */
-/* Толстая зеленая обводка */
-:is(input[type=text], textarea):not(:read-only):focus {
+/* focus только для изменяемых */
+:where(input[type="text"], input[type="email"], input[type="password"], textarea):not(:read-only):focus {
     border-color: var(--input-focus-border);
     outline: 1px solid var(--input-focus-border);
 }
 
-/* При фокусе input или textarea (Только неизменяемые) */
-/* Толстая серая обводка */
-:is(input[type=text], textarea):read-only:focus {
+/* focus для read-only */
+:where(input[type="text"], input[type="email"], input[type="password"], textarea):read-only:focus {
     border-color: var(--input-border);
     outline: 1px solid var(--input-border);
 }
 
-
-/* Если инпут с ошибкой */
-:is(input[type=text], textarea).error {
+/* Ошибка */
+:where(input[type="text"], input[type="email"], input[type="password"], textarea).error {
     border-color: var(--input-error-border);
     outline: 1px solid var(--input-error-border);
 }
 
+/* placeholder */
+:where(input[type="text"], input[type="email"], input[type="password"], textarea)::placeholder {
+    color: var(--text-gray);
+}
 
-/* Темный текст textarea */
-:is(input[type=text], textarea)::placeholder { color: var(--text-gray); }
-
-/* Фикс подсветки авто-ввода */
-:is(input[type=text], textarea):is(:-webkit-autofill, :-webkit-autofill:focus) {
+/* Фикс подсветки autofill (авто ввод) */
+:where(input[type="text"], input[type="email"], input[type="password"], textarea):is(:-webkit-autofill, :-webkit-autofill:focus) {
     transition: background-color 600000s 0s, color 600000s 0s;
 }
