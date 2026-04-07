@@ -10,7 +10,7 @@
 
 :root {
     /* Основные цвета */
-    --bg-primary:     #24182C; /* Фон Main */
+    --bg-primary:     #24182C; /* Фон Body */
     --bg-secondary:   #220C0C; /* Фон Sidebar */
     --bg-accent:      #301615; /* Акцентный цвет (для фона инпута) */
     --bg-light-red:   #EE3F48; /* Ярко красный */
@@ -41,6 +41,10 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+}
+
+body {
+    background-color: var(--bg-primary);
 }
 
 

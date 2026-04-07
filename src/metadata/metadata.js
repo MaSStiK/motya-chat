@@ -1,6 +1,6 @@
 import { Montserrat } from "next/font/google"
 
-const THEME_COLOR = "#FFE7E4"
+const THEME_COLOR = "#24182C"
 const SITE_TITLE = "Мотя Чат"
 const SITE_DESCRIPTION = "Мотя Чат — современный мессенджер, вдохновлённый Telegram, с поддержкой чатов в реальном времени, удобной архитектурой и высокой производительностью."
 const SITE_URL = "https://hedgehog-rp.ru"
