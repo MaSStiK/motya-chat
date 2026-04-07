@@ -7,6 +7,7 @@ export default function Searchbar() {
     return (
         <div className="searchbar">
             <TextInput
+                type="text"
                 placeholder="Поиск..."
                 icon={Search}
                 color="#7E6f6E"

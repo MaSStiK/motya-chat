@@ -17,6 +17,7 @@ import "./TextInput.css"
 // Кнопка с картинкой, но так же есть возможность отобразить текст после картинки
 export default function TextInput({
     className="", style,
+    type="text",
 
     // Пропсы для отображения картинки
     icon, alt="button-image", color="#FFFFFF",
@@ -31,7 +32,7 @@ export default function TextInput({
 }) {
     // Добавляем стиль-модификатор перед передаваемыми классами
     const classes = clsx(
-        "ui-input",
+        "ui-text-input",
         {
             "input--small": small, // Маленький инпут
             "input--round": round, // Скругленные углы
@@ -53,7 +54,9 @@ export default function TextInput({
     return (
         <div {...commonProps}>
             {content}
-            <input {...rest} />
+            <input {...rest}
+                type={type}
+            />
         </div>
     )
 }
