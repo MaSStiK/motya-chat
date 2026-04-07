@@ -13,6 +13,7 @@
     --bg-primary:     #24182C; /* Фон Main */
     --bg-secondary:   #220C0C; /* Фон Sidebar */
     --bg-accent:      #301615; /* Акцентный цвет (для фона инпута) */
+    --bg-light-red:   #EE3F48; /* Ярко красный */
     --bg-transparent: #0E1113CC; /* Пока не используется (для анимации загрузки поверх контента) */
 
     /* Бордеры */
@@ -36,6 +37,12 @@
     }
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 
 * {
     padding: 0;
@@ -55,12 +62,12 @@
 
 /* Задний фон полосы прокрутки */
 *::-webkit-scrollbar-track {
-    border-radius: var(--border-radius);
+    border-radius: 4px;
     background-color: transparent;
 }
 
 /* Маркер прокрутки */
 *::-webkit-scrollbar-thumb {
-    border-radius: var(--border-radius);
+    border-radius: 4px;
     background-color: var(--border-secondary);
 }

@@ -12,6 +12,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--text-accent);
+    background-color: var(--bg-light-red);
     border-radius: 24px;
 }

@@ -2,24 +2,21 @@ import Image from "next/image"
 import Link from "next/link"
 import clsx from "clsx"
 
-import "./Input.css"
+import "./TextInput.css"
 
 // Пример использования
-/* <Button
+/* <TextInput
     src="/assets/image.png"
-    alt="button-test"
-    className=""
-    text="text"
-    title="title"
+    placeholder="text"
+    id="text"
+    name="title"
+    minLength={4}
+    maxLength={128}
 /> */
 
 // Кнопка с картинкой, но так же есть возможность отобразить текст после картинки
-export default function Input({
-    id, className="", style,
-    placeholder, // Заголовок при наведении
-    type="text",
-
-    onInput, onChange,
+export default function TextInput({
+    className="", style,
 
     // Пропсы для отображения картинки
     icon, alt="button-image", color="#FFFFFF",
@@ -27,7 +24,10 @@ export default function Input({
     // Модификаторы
     small,
     round,
-    disabled,
+    
+    // Все остальное летит в инпут
+    // id, name, placeholder, minLength, maxLength, onInput, onChange, required, disabled
+    ...rest
 }) {
     // Добавляем стиль-модификатор перед передаваемыми классами
     const classes = clsx(
@@ -39,7 +39,7 @@ export default function Input({
         className
     );
 
-    const commonProps = { id, className: classes, style }
+    const commonProps = { className: classes, style }
 
     const Icon = typeof icon === "object" ? icon : null // Если в icon передаем иконку из "lucide-react" - отображаем его как компонент
     const src = typeof icon === "string" ? icon : null // Если в icon передаем ссылку на картинку - отображаем как Image src
@@ -50,22 +50,10 @@ export default function Input({
         </div>
     )    
 
-    if (type === "text") {
-        return (
-            <div {...commonProps}>
-                {content}
-                <input 
-                    type="text"
-                    placeholder={placeholder}
-                    onInput={onInput}
-                    onChange={onChange}
-                    disabled={disabled}
-                />
-            </div>
-        )
-    }
-
     return (
-        <span>Доступен только Input text</span>
+        <div {...commonProps}>
+            {content}
+            <input {...rest} />
+        </div>
     )
 }

@@ -19,7 +19,6 @@
     --text-gray:   #F5F5F5B6;
     --text-accent: #EE3F48;
     --text-link:   #EE3F48;
-    --text-input-label: #B6B6B6;
 }
 
 /* Мобильная версия */
@@ -44,10 +43,10 @@ body {
 }
 
 /* Размер текста */
-h1, .h1 { font-size: var(--fs-xlarge); line-height: 1.2; }
-h2, .h2 { font-size: var(--fs-xlarge); line-height: 1.25; }
-h3, .h3 { font-size: var(--fs-large); line-height: 1.3; }
-h4, .h4 { font-size: var(--fs-large); line-height: 1.35; }
+h1, .h1 { font-size: var(--fs-xlarge); font-weight: var(--fw-bold); line-height: 1.2; }
+h2, .h2 { font-size: var(--fs-xlarge); font-weight: var(--fw-semibold); line-height: 1.25; }
+h3, .h3 { font-size: var(--fs-large);  font-weight: var(--fw-semibold); line-height: 1.3; }
+h4, .h4 { font-size: var(--fs-large);  font-weight: var(--fw-semibold); line-height: 1.35; }
 p, .p, span, label { font-size: var(--fs-medium); line-height: 1.5; }
 .fs-xxlarge  { font-size: var(--fs-xxlarge); }
 .fs-xlarge   { font-size: var(--fs-xlarge); }

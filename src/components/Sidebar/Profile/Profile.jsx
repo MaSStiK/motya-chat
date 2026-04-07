@@ -11,7 +11,7 @@ export default function Profile() {
                     <span className="fs-large fw-semibold">М</span>
                 </div>
                 <div className="flex-col">
-                    <span className="fs-large fw-semibold">Мотя</span>
+                    <h3>Мотя</h3>
                     <span className="fs-small text-gray profile-tag">@test</span>
                 </div>
             </div>
