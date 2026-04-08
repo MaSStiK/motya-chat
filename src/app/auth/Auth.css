@@ -1,0 +1,63 @@
+#auth-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Форма */
+.auth {
+    width: 448px;
+    padding: var(--gap-8);
+    background-color: var(--bg-secondary);
+    border-radius: 32px;
+    border-right: 1px var(--border-accent) solid;
+}
+
+.auth__top {
+    margin-bottom: var(--gap-8);
+}
+
+.auth__icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 48px;
+    background-color: var(--bg-light-red);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+}
+
+/* "Добро пожаловать" */
+.auth h1 {
+    margin-bottom: var(--gap-2);
+}
+
+/* Разделитель */
+.auth__hr {
+    position: relative;
+    border-bottom: 1px var(--border-accent) solid;
+    padding-top: 34px;
+    margin-bottom: 34px;
+}
+
+.auth__hr span {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: var(--bg-secondary);
+    padding: 0 var(--gap-2);
+}
+
+.auth__change-form {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--gap-6);
+}
+
+.auth__change-form .button {
+    font-size: var(--fs-small);
+}

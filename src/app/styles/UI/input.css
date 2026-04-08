@@ -6,8 +6,8 @@
     --range-thumb: #999999;
 
     /* Высота инпута */
-    --input-height: 50px;
-    --input-height-small: 40px;
+    --input-height: 40px;
+    --input-height-big: 48px;
 }
 
 /* Основные стили для инпута и textarea */

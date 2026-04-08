@@ -23,7 +23,7 @@ export default function TextInput({
     icon, alt="button-image", color="#FFFFFF",
     
     // Модификаторы
-    small,
+    big,
     round,
     
     // Все остальное летит в инпут
@@ -34,7 +34,7 @@ export default function TextInput({
     const classes = clsx(
         "ui-text-input",
         {
-            "input--small": small, // Маленький инпут
+            "input--big": big, // Маленький инпут
             "input--round": round, // Скругленные углы
         },
         className

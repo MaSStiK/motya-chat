@@ -1,6 +1,6 @@
 .ui-text-input {
     width: 100%;
-    height: 50px;
+    height: var(--input-height);
     position: relative;
 }
 
@@ -18,7 +18,7 @@
 }
 
 /* Маленький инпут */
-.ui-text-input.input--small { height: var(--input-height-small); }
+.ui-text-input.input--big { height: var(--input-height-big); }
 
 /* Скругленные углы */
 .ui-text-input.input--round { border-radius: 18px; padding: var(--gap-1) 8px; }

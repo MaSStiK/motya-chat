@@ -30,7 +30,7 @@ export default function Button({
     icon, alt="button-image", color="#FFFFFF",
     
     // Модификаторы
-    small,
+    big,
     round,
     width100,
     atStart,
@@ -41,7 +41,7 @@ export default function Button({
     const classes = clsx(
         "button ui-button",
         {
-            "button--small": small, // Маленькая кнопка
+            "button--big": big, // Большая кнопка
             "button--round": round, // Скругленные углы
             "button--width100": width100, // Кнопка во всю ширину
             "button--atStart": atStart, // Контент кнопки в начале

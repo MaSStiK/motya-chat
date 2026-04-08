@@ -9,9 +9,7 @@ export default function Searchbar() {
             <TextInput
                 type="text"
                 placeholder="Поиск..."
-                icon={Search}
-                color="#7E6f6E"
-                small
+                icon={Search} color="#7E6f6E"
             />
         </div>
     )
