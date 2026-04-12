@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import MongoConnect from "@/lib/mongodb";
 import User from "@/lib/mongodb/models/User";
-import { signSession } from "@/lib/session";
+import { signToken } from "@/lib/auth";
 
 export async function GET(req) {
     const { searchParams } = new URL(req.url);
@@ -82,7 +82,7 @@ export async function GET(req) {
         await user.save();
     }
 
-    const sessionToken = signSession({
+    const sessionToken = signToken({
         userId: user._id.toString(),
         email: user.email,
         role: user.role,

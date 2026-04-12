@@ -1,19 +1,33 @@
-import { cookies } from "next/headers";
-import { verifySession } from "@/lib/session";
-import MongoConnect from "@/lib/mongodb";
-import User from "@/lib/mongodb/models/User";
+import { cookies } from "next/headers"
+import MongoConnect from "@/lib/mongodb"
+import User from "@/lib/mongodb/models/User"
+import { verifyToken } from "@/lib/auth"
 
 export default async function getCurrentUser() {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("session")?.value;
+    try {
+        const cookieStore = await cookies()
+        const token = cookieStore.get("token")?.value
 
-    if (!token) return null;
+        if (!token) return null
 
-    const payload = verifySession(token);
-    if (!payload?.userId) return null;
+        const payload = verifyToken(token)
+        if (!payload) return null
 
-    await MongoConnect();
+        await MongoConnect()
 
-    const user = await User.findById(payload.userId).lean();
-    return user || null;
+        const user = await User.findById(payload.userId).select("-password")
+        if (!user) return null
+
+        // Преобразуем mongoose document в обычный объект
+        return {
+            id: user._id.toString(),
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar,
+            role: user.role
+        }
+    } catch (error) {
+        console.error(error)
+        return null
+    }
 }

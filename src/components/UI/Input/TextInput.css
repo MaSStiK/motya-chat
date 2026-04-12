@@ -1,3 +1,9 @@
+/* Текст ошибки под инпутом */
+.input-error, .form-error {
+    color: var(--text-accent);
+    font-size: var(--fs-small);
+}
+
 .ui-text-input {
     width: 100%;
     height: var(--input-height);
@@ -17,8 +23,5 @@
     padding: 12px 12px 12px 44px;
 }
 
-/* Маленький инпут */
+/* Большой инпут */
 .ui-text-input.input--big { height: var(--input-height-big); }
-
-/* Скругленные углы */
-.ui-text-input.input--round { border-radius: 18px; padding: var(--gap-1) 8px; }

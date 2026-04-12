@@ -1,15 +1,24 @@
+import { redirect } from "next/navigation"
+import AuthProvider from "@/components/Auth/AuthProvider"
 import Sidebar from "@/components/Sidebar/Sidebar"
+import getCurrentUser from "@/lib/getCurrentUser"
 
 import "./app.css"
 import "./app-phone.css"
 
-export default function MainLayout({ children }) {
+export default async function MainLayout({ children }) {
+    const user = await getCurrentUser()
+
+    if (!user) {
+        redirect("/auth")
+    }
+
     return (
-        <div id="layout">
-            <Sidebar />
-            <main>
-                {children}
-            </main>
-        </div>
+        <AuthProvider user={user}>
+            <div id="layout">
+                <Sidebar />
+                <main>{children}</main>
+            </div>
+        </AuthProvider>
     )
 }

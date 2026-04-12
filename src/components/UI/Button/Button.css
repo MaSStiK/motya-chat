@@ -13,9 +13,6 @@
 /* Большая кнопка */
 .button.ui-button.button--big { height: var(--button-height-big); }
 
-/* Скругленные углы */
-.button.ui-button.button--round { border-radius: 18px; padding: var(--gap-1) 8px; }
-
 /* Во всю ширину контейнера */
 .button.ui-button.button--width100 { width: 100%; }
 
@@ -25,4 +22,14 @@
 /* Модификатор для мобильного скрытия текста */
 @media screen and (max-width: 400px) { 
     .button.ui-button.button--phoneTextHide span { display: none; }
+}
+
+/* Анимация вращения иконки загрузки */
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

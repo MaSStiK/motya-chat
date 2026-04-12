@@ -1,9 +1,8 @@
 @import "./base/typography.css";
 @import "./base/flex.css";
 @import "./base/elements.css";
-
 @import "./UI/button.css";
-@import "./UI/input.css";
+@import "./UI/input-text.css";
 @import "./UI/input-radio.css";
 @import "./UI/input-checkbox.css";
 @import "./UI/select.css";

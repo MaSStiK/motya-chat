@@ -24,7 +24,7 @@ export default function TextInput({
     
     // Модификаторы
     big,
-    round,
+    error,
     
     // Все остальное летит в инпут
     // id, name, placeholder, minLength, maxLength, onInput, onChange, required, disabled
@@ -34,8 +34,7 @@ export default function TextInput({
     const classes = clsx(
         "ui-text-input",
         {
-            "input--big": big, // Маленький инпут
-            "input--round": round, // Скругленные углы
+            "input--big": big, // Большой инпут 50px
         },
         className
     );
@@ -52,11 +51,16 @@ export default function TextInput({
     )    
 
     return (
-        <div {...commonProps}>
-            {content}
-            <input {...rest}
-                type={type}
-            />
+        <div className="flex-col gap-1">
+            <div {...commonProps}>
+                {content}
+                <input {...rest}
+                    className={error ? "error" : ""}
+                    type={type}
+                    aria-invalid={!!error}
+                />
+            </div>
+            {error && <span className="input-error">{error}</span>}
         </div>
     )
 }

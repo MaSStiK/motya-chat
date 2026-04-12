@@ -7,8 +7,8 @@ const USER_LIMITS = {
         max: 128,
     },
     password: {
-        min: 6,
-        max: 128,
+        min: 8,
+        max: 256,
     },
     avatar: {
         max: 1024,
