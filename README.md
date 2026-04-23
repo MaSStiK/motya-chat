@@ -1,4 +1,4 @@
-# red-chat (Next.js)
+# Red-chat (Next.js)
 
 ## О проекте
 
