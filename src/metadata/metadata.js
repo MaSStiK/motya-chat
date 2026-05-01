@@ -42,7 +42,7 @@ export const _metadata = {
         url: SITE_URL,
         siteName: SITE_TITLE,
         images: [{
-            url: "/favicons/favicon-og-1200x630.png",
+            url: "/favicons/favicon-og-1200x630.png", // Приписка og - Open Graph
             width: 1200,
             height: 630
         }],
@@ -52,7 +52,7 @@ export const _metadata = {
         card: "summary_large_image",
         title: SITE_TITLE,
         description: SITE_DESCRIPTION,
-        images: ["/favicons/favicon-og-1200x630.png"],
+        images: ["/favicons/favicon-og-1200x630.png"], // Приписка og - Open Graph
         site: "@MaS2tiK",
         creator: "@MaS2tiK"
     },
