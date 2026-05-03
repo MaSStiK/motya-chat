@@ -19,8 +19,19 @@
     --button-height-big: 50px;
 }
 
-/* Основные стили для кнопки */
-button, .button {
+/* Отключаем стили у стандартной кнопки */
+button {
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* Стили для кнопки */
+.button {
     width: min(200px, 100%);
     height: var(--button-height);
     min-height: var(--button-height); /* Минимальная ширина кнопки является высота и получается квадратная форма */
@@ -46,17 +57,6 @@ button, .button {
     cursor: pointer;
 }
 
-/* Кликабельный текст */
-.button.text {
-    width: fit-content;
-    height: fit-content;
-    min-height: 0;
-    border-radius: 0;
-    padding: 0;
-    color: var(--text-accent);
-    background-color: transparent;
-}
-
 .button.green    { background-color: var(--button-green); }
 .button.red      { background-color: var(--button-red); }
 .button.tp       { background-color: var(--button-tp); }
@@ -71,7 +71,7 @@ button, .button {
 }
 
 /* Обводка при табуляции */
-.button:focus-visible { outline: 2px solid white; }
+:is(button, .button):focus-visible { outline: 2px solid white; }
 
 /* Наведение на пк */
 @media (hover: hover) {
@@ -81,7 +81,6 @@ button, .button {
     .button.tp:is(:hover, :focus-visible)       { background-color: var(--button-tp-hover); }
     .button.outlined:is(:hover, :focus-visible) { background-color: var(--button-outlined-hover); }
     .button:disabled:is(:hover, :focus-visible) { background-color: var(--button-disabled); }
-    .button.text:is(:hover, :focus-visible)     { background-color: transparent; text-decoration: underline; }
 }
 
 /* Клик на телефоне */
@@ -92,7 +91,6 @@ button, .button {
     .button.tp:active       { background-color: var(--button-tp-hover); }
     .button.outlined:active { background-color: var(--button-outlined-hover); }
     .button:disabled:active { background-color: var(--button-disabled); }
-    .button.text:active     { background-color: transparent; text-decoration: underline; }
 }
 
 /* Минимальный размер кнопки */

@@ -1,0 +1,26 @@
+.message-list {
+    padding: var(--gap-2);
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+}
+
+/* CSS for other than iOS devices */ 
+@supports not (-webkit-touch-callout: none) {
+    .message-list {
+        overflow-y: overlay; /* Scroll поверх */
+    }
+}
+
+.message {
+    --bg-message: #280B0B; /* Цвета фона сообщения */
+    width: fit-content;
+    max-width: 430px;
+    padding: var(--gap-3);
+    border-radius: 16px 16px 16px 4px;
+    background-color: var(--bg-message);
+}
+
+/* Если сообщение от текущего юзера */
+.message.message--from-me {
+    background-color: var(--bg-dark-red);
+}

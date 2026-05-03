@@ -1,7 +1,7 @@
-import SelectChat from "@/components/SelectChat/SelectChat"
+import Chat from "@/components/Chat/Chat"
 
 export default function MainPage() {
     return (
-        <SelectChat />
+        <Chat />
     )
 }

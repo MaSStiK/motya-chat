@@ -54,6 +54,6 @@ export function useDebounceAsync(fn, delay = 500) {
         run: debouncedFn,
         loading,
         error,
-        setError,
+        setError
     };
 }

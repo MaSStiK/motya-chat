@@ -3,7 +3,7 @@ import tinycolor from "tinycolor2"
 
 import "./ProfileAvatar.css"
 
-    export default function ProfileAvatar({ name }) {
+    export default function ProfileAvatar({ name, small=false }) {
     const colorHash = new ColorHash()
     const bgColor = colorHash.hex(name) 
     const textColor = tinycolor(bgColor).isLight() ? "#000000" : "#ffffff"

@@ -94,6 +94,15 @@ p, .p, span, label { font-size: var(--fs-medium); line-height: 1.5; }
 /* Подчеркнутый текст */
 .text-underline { text-decoration: underline; }
 
+/* Подчеркивание кнопки при наведении */
+@media (hover: hover) {
+    .text-hover-underline:is(:hover, :focus-visible) { text-decoration: underline; }
+}
+
+@media (hover: none) {
+    .text-hover-underline:active { text-decoration: underline; }
+}
+
 /* Ссылка (Link в том числе) */
 a {
     font-size: var(--fs-medium);

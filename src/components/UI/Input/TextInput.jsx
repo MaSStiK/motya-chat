@@ -39,7 +39,7 @@ export default function TextInput({
             "input--width100": width100, // Растяжение на всю ширину
         },
         className
-    );
+    )
 
     const commonProps = { className: classes, style }
 

@@ -57,7 +57,3 @@
     justify-content: center;
     margin-top: var(--gap-6);
 }
-
-.auth__change-form .button {
-    font-size: var(--fs-small);
-}

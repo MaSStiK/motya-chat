@@ -2,7 +2,7 @@ import Image from "next/image"
 import Button from "@/components/UI/Button/Button"
 import { Home } from "lucide-react"
 
-import "@/app/styles/layout/not-found.css"
+import "@/app/styles/not-found.css"
 
 export default function NotFound() {
     return (

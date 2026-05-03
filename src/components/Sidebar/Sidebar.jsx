@@ -1,6 +1,6 @@
 import Profile from "@/components/Profile/Profile"
 import Searchbar from "./Searchbar/Searchbar"
-import Chats from "@/components/Chats/Chats"
+import ChatList from "@/components/ChatList/ChatList"
 import "./Sidebar.css"
 
 export default function Sidebar() {
@@ -8,9 +8,7 @@ export default function Sidebar() {
         <div className="sidebar">
             <Profile />
             <Searchbar />
-
-            {/* if messages > messages else not found */}
-            <Chats />
+            <ChatList />
         </div>
     )
 }

@@ -8,16 +8,5 @@
 main {
     width: calc(100% - var(--sidebar-width));
     height: 100%;
-    padding: var(--gap-5);
-
-    overflow-y: auto;
-    scrollbar-gutter: stable;
     position: relative;
-}
-
-/* CSS for other than iOS devices */ 
-@supports not (-webkit-touch-callout: none) {
-    main {
-        overflow-y: overlay; /* Scroll поверх */
-    }
 }

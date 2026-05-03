@@ -1,0 +1,6 @@
+.chat-header {
+    height: 81px;
+    padding: var(--gap-4);
+    background-color: var(--bg-accent);
+    border-bottom: 1px solid var(--border-accent);
+}

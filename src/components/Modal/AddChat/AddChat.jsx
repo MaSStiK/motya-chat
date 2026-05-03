@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { useDebounceAsync } from "@/lib/hooks/useDebounceAsync"
+import { useSetAtom } from "jotai"
+import { chatListAtom, activeChatAtom } from "@/atoms/app"
 import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
 import { AtSign, UserPlus } from "lucide-react"
@@ -9,6 +11,8 @@ import { AtSign, UserPlus } from "lucide-react"
 import "./AddChat.css"
 
 export default function AddChat({ onClose }) {
+    const setChatList = useSetAtom(chatListAtom)
+    const setActiveChat = useSetAtom(activeChatAtom)
     const [email, setEmail] = useState("")
     const [user, setUser] = useState(null)
     const [createError, setCreateError] = useState("")
@@ -38,7 +42,7 @@ export default function AddChat({ onClose }) {
 
         // Устанавливаем информацию о пользователе и далее отобразится его имя
         setUser(data)
-    }, 500)
+    })
 
     // Функция вызываемая при обновлении инпута
     const handleChange = (event) => {
@@ -80,6 +84,14 @@ export default function AddChat({ onClose }) {
             }
 
             console.log("Chat created:", data)
+
+            // Если чат новый - добавляем его в список чатов
+            if (data.isNew) {
+                setChatList(prev => [...prev, data.chat])
+                setActiveChat(data.chat.id)
+            } else {
+                setActiveChat(data.chat.id)
+            }
 
             // Чат создан или найден - закрытые модального окна
             onClose()

@@ -49,7 +49,7 @@ export default function Button({
             "button--loading": loading // Анимация загрузки
         },
         className
-    );
+    )
 
     const commonProps = { id, className: classes, style, title }
 

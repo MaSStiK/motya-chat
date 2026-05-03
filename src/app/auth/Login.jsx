@@ -122,7 +122,7 @@ export default function Login({ setForm }) {
             {/* <a href="/api/auth/google">Войти через Google</a> */}
             
             <div className="auth__change-form">
-                <button className="button text" onClick={() => setForm("registration")}>Нет аккаунта? Зарегистрируйтесь</button>
+                <button className="fs-small text-accent text-hover-underline" onClick={() => setForm("registration")}>Нет аккаунта? Зарегистрируйтесь</button>
             </div>
         </div>
     )
