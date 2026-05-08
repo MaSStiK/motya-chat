@@ -11,8 +11,6 @@ export default function ChatHeader() {
     if (!activeChat) return null
 
     const chat = chatList.find(chat => chat.id === activeChat)
-    console.log(chat);
-
     if (!activeChat) return <p>Чат не найден</p>
 
     return (

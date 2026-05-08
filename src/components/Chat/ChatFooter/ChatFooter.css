@@ -1,0 +1,9 @@
+.chat-footer {
+    padding: var(--gap-2);
+    background-color: var(--bg-accent);
+    align-items: center;
+}
+
+.message-input {
+    flex: 1;
+}

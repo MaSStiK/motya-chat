@@ -17,7 +17,7 @@ export default function Profile() {
             <UserPreview
                 avatar={user?.name || ""}
                 name={user?.name || ""}
-                subtext={`@${user?.username || ""}`}
+                subtext={user?.username ? `@${user?.username}` : ""}
             />
             <div className="flex-row gap-2">
                 <Button

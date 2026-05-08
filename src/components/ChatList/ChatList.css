@@ -1,17 +1,17 @@
-.chat {
+.chat-list__item {
     padding: var(--gap-3);
     text-align: left;
 }
 
-/* Подчеркивание кнопки при наведении */
+/* Подсвечиваем кнопки при наведении */
 @media (hover: hover) {
-    .chat:is(:hover, :focus-visible) { background-color: var(--bg-accent); }
+    .chat-list__item:is(:hover, :focus-visible) { background-color: var(--bg-accent); }
 }
 
 @media (hover: none) {
-    .chat:active { background-color: var(--bg-accent); }
+    .chat-list__item:active { background-color: var(--bg-accent); }
 }
 
-.chat.active {
+.chat-list__item.active {
     background-color: var(--bg-dark-red);
 }

@@ -25,27 +25,34 @@ export default function TextInput({
     
     // Модификаторы
     big,
+    round,
     width100,
+    withoutBorder,
     
     // Все остальное летит в инпут
     // id, name, placeholder, minLength, maxLength, onInput, onChange, required, disabled
     id, ...rest
 }) {
+    const Icon = typeof icon === "object" ? icon : null // Если в icon передаем иконку из "lucide-react" - отображаем его как компонент
+    const src = typeof icon === "string" ? icon : null // Если в icon передаем ссылку на картинку - отображаем как Image src
+    const hasImage = Icon || src
+
     // Добавляем стиль-модификатор перед передаваемыми классами
     const classes = clsx(
         "ui-text-input",
         {
+            "input--withImage": hasImage, // Нужен ли отступ для картинки
             "input--big": big, // Большой инпут 50px
+            "input--round": round, // Скругленный инпут
             "input--width100": width100, // Растяжение на всю ширину
+            "input--withoutBorder": withoutBorder, // Без обводки
         },
         className
     )
 
     const commonProps = { className: classes, style }
-
-    const Icon = typeof icon === "object" ? icon : null // Если в icon передаем иконку из "lucide-react" - отображаем его как компонент
-    const src = typeof icon === "string" ? icon : null // Если в icon передаем ссылку на картинку - отображаем как Image src
-    const content = (
+    
+    const content = hasImage && (
         <div className="input-image">
             {Icon && <Icon size={20} color={color} />}
             {src && <Image src={src} alt={alt} width={20} height={20} />}

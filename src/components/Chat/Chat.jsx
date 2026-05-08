@@ -2,9 +2,12 @@
 import { useEffect } from "react"
 import SelectChat from "./SelectChat/SelectChat"
 import ChatHeader from "./ChatHeader/ChatHeader"
+import ChatFooter from "./ChatFooter/ChatFooter"
 import MessageList from "./MessageList/MessageList"
 import { useAtom } from "jotai"
 import { activeChatAtom } from "@/atoms/app"
+
+import "./Chat.css"
 
 export default function Chat() {
     const [activeChat, setActiveChat] = useAtom(activeChatAtom)
@@ -35,9 +38,10 @@ export default function Chat() {
     }
 
     return (
-        <div>
+        <div className="flex-col chat">
             <ChatHeader />
             <MessageList />
+            <ChatFooter />
         </div>
     )
 }

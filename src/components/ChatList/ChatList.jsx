@@ -50,7 +50,7 @@ export default function ChatList() {
     return (
         <div className="flex-col">
             {chatList.map((chat) => (
-                <button className="flex-row gap-3 chat" key={chat.id} onClick={() => openChat(chat.id)}>
+                <button className="flex-row gap-3 chat-list__item" key={chat.id} onClick={() => openChat(chat.id)}>
                     <UserPreview
                         avatar={chat.title}
                         name={chat.title}

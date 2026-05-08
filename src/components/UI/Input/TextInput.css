@@ -24,6 +24,12 @@
     position: relative;
 }
 
+/* Делаем высоту инпута равной высоте обвертки */
+.ui-text-input .input-wrapper input {
+    height: 100%;
+    padding: 12px;
+}
+
 /* Иконка слева от инпута */
 .ui-text-input .input-wrapper .input-image {
     position: absolute;
@@ -32,14 +38,22 @@
     transform: translateY(-40%)
 }
 
-/* Делаем высоту инпута равной высоте обвертки и даем пространство для картинки */
-.ui-text-input .input-wrapper input:is([type="text"], [type="email"], [type="password"]) {
-    height: 100%;
-    padding: 12px 12px 12px 44px;
-}
+/* Если есть картинка даем пространство для картинки */
+.ui-text-input.input--withImage .input-wrapper input { padding-left: 44px; }
+
+/* ----- Модификаторы ----- */
 
 /* Большой инпут */
 .ui-text-input.input--big .input-wrapper { height: var(--input-height-big); }
 
+/* Скругленный инпут */
+.ui-text-input.input--round .input-wrapper,
+.ui-text-input.input--round .input-wrapper input { border-radius: var(--input-height-big); }
+
 /* Во всю ширину контейнера */
 .ui-text-input.input--width100 { width: 100%; }
+
+.ui-text-input.input--withoutBorder input {
+    border: none;
+    outline: none;
+}

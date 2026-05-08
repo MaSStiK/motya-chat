@@ -33,6 +33,7 @@ export default function Button({
     
     // Модификаторы
     big,
+    round,
     width100,
     atStart,
     phoneTextHide,
@@ -43,6 +44,7 @@ export default function Button({
         "button ui-button",
         {
             "button--big": big, // Большая кнопка 50px
+            "button--round": round, // Круглая кнопка
             "button--width100": width100, // Растяжение на всю ширину
             "button--atStart": atStart, // Позиционированные контента слева
             "button--phoneTextHide": phoneTextHide, // Скрывающийся на телефоне текст

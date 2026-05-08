@@ -1,18 +1,20 @@
 .message-list {
+    /* Растягиваем максимально по высоте */
+    flex: 1;
     padding: var(--gap-2);
     overflow-y: auto;
     scrollbar-gutter: stable;
 }
 
-/* CSS for other than iOS devices */ 
 @supports not (-webkit-touch-callout: none) {
     .message-list {
-        overflow-y: overlay; /* Scroll поверх */
+        overflow-y: overlay;
     }
 }
 
 .message {
-    --bg-message: #280B0B; /* Цвета фона сообщения */
+    /* Цвета фона сообщения не от текущего юзера */
+    --bg-message: #280B0B;
     width: fit-content;
     max-width: 430px;
     padding: var(--gap-3);
