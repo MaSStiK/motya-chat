@@ -31,7 +31,7 @@ export async function POST(req) {
         }
 
         const isMember = chat.members.some(
-            (memberId) => memberId.toString() === user.userId
+            (memberId) => memberId.toString() === user.id
         )
 
         if (!isMember) {
@@ -43,9 +43,9 @@ export async function POST(req) {
 
         const message = await Message.create({
             chatId,
-            senderId: user.userId,
+            senderId: user.id,
             text: text.trim(),
-            readBy: [user.userId]
+            readBy: [user.id]
         })
 
         chat.lastMessageId = message._id

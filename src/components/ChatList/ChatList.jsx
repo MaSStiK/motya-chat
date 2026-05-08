@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useAtom, useSetAtom } from "jotai"
 import { chatListAtom, activeChatAtom } from "@/atoms/app"
 import ChatListFeedback from "./ChatListFeedback/ChatListFeedback"
-import ProfileAvatar from "@/components/ProfileAvatar/ProfileAvatar"
+import UserPreview from "@/components/UserPreview"
 
 import "./ChatList.css"
 
@@ -51,16 +51,11 @@ export default function ChatList() {
         <div className="flex-col">
             {chatList.map((chat) => (
                 <button className="flex-row gap-3 chat" key={chat.id} onClick={() => openChat(chat.id)}>
-                    <ProfileAvatar name={chat.title || ""} />
-                    <div className="flex-col">
-                        <h3>{chat.title}</h3>
-                        <span className="fs-small text-gray">
-                            {chat.lastMessage
-                                ? chat.lastMessage.text
-                                : "Нет сообщений"
-                            }
-                        </span>
-                    </div>
+                    <UserPreview
+                        avatar={chat.title}
+                        name={chat.title}
+                        subtext={chat.lastMessage ? chat.lastMessage.text : "Нет сообщений"}
+                    />
                 </button>
             ))}
         </div>

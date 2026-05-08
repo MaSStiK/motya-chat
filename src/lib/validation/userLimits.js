@@ -3,6 +3,10 @@ const USER_LIMITS = {
         min: 2,
         max: 32,
     },
+    username: {
+        min: 2,
+        max: 32,
+    },
     email: {
         max: 128,
     },

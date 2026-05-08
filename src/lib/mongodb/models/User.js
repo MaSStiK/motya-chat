@@ -10,6 +10,15 @@ const UserSchema = new mongoose.Schema({
         minlength: USER_LIMITS.name.min,
         maxlength: USER_LIMITS.name.max
     },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        trim: true,
+        minlength: USER_LIMITS.username.min,
+        maxlength: USER_LIMITS.username.max
+    },
     email: {
         type: String,
         required: true,
@@ -38,7 +47,6 @@ const UserSchema = new mongoose.Schema({
 },
 {
     timestamps: true
-
 })
 
 export default mongoose.models.User || mongoose.model("User", UserSchema)

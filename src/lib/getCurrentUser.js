@@ -2,8 +2,10 @@ import { cookies } from "next/headers"
 import MongoConnect from "@/lib/mongodb"
 import User from "@/lib/mongodb/models/User"
 import { verifyToken } from "@/lib/auth"
+import { serializeUser } from "@/lib/serialization/user"
 
-// Функция используется в layout для получения актуальной информации о пользователе при старте приложения
+
+// Функция используется в (main)/layout для получения актуальной информации о пользователе при старте приложения
 export default async function getCurrentUser() {
     try {
         const cookieStore = await cookies()
@@ -16,17 +18,11 @@ export default async function getCurrentUser() {
 
         await MongoConnect()
 
-        const user = await User.findById(payload.userId).select("-password")
+        const user = await User.findById(payload.id).select("-password")
         if (!user) return null
 
         // Преобразуем mongoose document в обычный объект
-        return {
-            id: user._id.toString(),
-            name: user.name,
-            email: user.email,
-            avatar: user.avatar,
-            role: user.role
-        }
+        return serializeUser(user)
     } catch (error) {
         console.error(error)
         return null

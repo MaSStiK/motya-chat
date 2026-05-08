@@ -4,6 +4,7 @@ import MongoConnect from "@/lib/mongodb"
 import User from "@/lib/mongodb/models/User"
 import { validateLogin } from "@/lib/validation/validateLogin"
 import { signToken } from "@/lib/auth"
+import { serializeUser } from "@/lib/serialization/user"
 
 export async function POST(req) {
     try {
@@ -55,22 +56,17 @@ export async function POST(req) {
 
         // Генерируем JWT
         const token = signToken({
-            userId: user._id.toString(),
+            id: user._id.toString(),
             email: user.email,
-            name: user.name
+            name: user.name,
+            username: user.username
         })
 
         // Формируем ответ
         const response = NextResponse.json(
             {
                 message: "Вход выполнен успешно",
-                user: {
-                    id: user._id.toString(),
-                    name: user.name,
-                    email: user.email,
-                    avatar: user.avatar,
-                    role: user.role
-                }
+                user: serializeUser(user)
             },
             { status: 200 }
         )

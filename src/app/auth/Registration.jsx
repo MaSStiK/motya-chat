@@ -76,6 +76,7 @@ export default function Registration({ setForm }) {
                 <TextInput
                     id="name"
                     name="name"
+                    autoComplete="name"
                     label="Имя"
                     type="text"
                     icon={User} color="#7E6f6E"
@@ -90,6 +91,7 @@ export default function Registration({ setForm }) {
                 <TextInput
                     id="email"
                     name="email"
+                    autoComplete="email"
                     label="Email"
                     type="email"
                     icon={Mail} color="#7E6f6E"
@@ -103,6 +105,7 @@ export default function Registration({ setForm }) {
                 <TextInput
                     id="password"
                     name="password"
+                    autoComplete="new-password"
                     label="Password"
                     type="password"
                     icon={Lock} color="#7E6f6E"

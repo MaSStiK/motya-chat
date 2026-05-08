@@ -1,5 +1,4 @@
 import { montserrat, _metadata, _viewport } from "@/metadata/metadata"
-import Sidebar from "@/components/Sidebar/Sidebar"
 
 import "@/app/styles/style.css"
 

@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { useDebounceAsync } from "@/lib/hooks/useDebounceAsync"
 import { useSetAtom } from "jotai"
@@ -62,7 +61,7 @@ export default function AddChat({ onClose }) {
 
     // Функция создания чата
     const createChat = async () => {
-        if (!user?._id || createLoading || searchLoading) return
+        if (!user?.id || createLoading || searchLoading) return
         setCreateLoading(true)
         setCreateError("")
 
@@ -72,7 +71,7 @@ export default function AddChat({ onClose }) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    memberId: user._id
+                    memberId: user.id
                 })
             })
 
@@ -110,15 +109,14 @@ export default function AddChat({ onClose }) {
                 <div className="add-chat__icon">
                     <UserPlus size={48} color="#EE3F48" />
                 </div>
-                <span className="text-center text-gray">Введите username пользователя, с которым хотите начать чат</span>
+                <span className="text-center text-gray">Введите имя пользователя, с которым хотите начать чат</span>
             </div>
 
             <div className="flex-col gap-5">
                 <div className="flex-col gap-2">
                     <TextInput
-                        label="Email пользователя"
                         type="text"
-                        placeholder="example@mail.com"
+                        placeholder="username"
                         icon={AtSign}
                         color="#7E6f6E"
                         value={email}
@@ -127,8 +125,6 @@ export default function AddChat({ onClose }) {
                         width100
                         big
                     />
-                    <span className="fs-small text-gray">Без символа @</span>
-
                     {(user && !searchError) && <span className="fs-small text-green">Пользователь: {user.name}</span>}
                 </div>
 

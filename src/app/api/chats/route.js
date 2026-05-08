@@ -5,16 +5,7 @@ import User from "@/lib/mongodb/models/User"
 import Chat from "@/lib/mongodb/models/Chat"
 import Message from "@/lib/mongodb/models/Message"
 import isValidObjectId from "@/lib/validation/isValidObjectId"
-
-// Форматируем пользователя под ответ API
-function formatUser(user) {
-    return {
-        id: user._id.toString(),
-        name: user.name,
-        email: user.email,
-        avatar: user.avatar,
-    }
-}
+import { serializePublicUser } from "@/lib/serialization/user"
 
 // Ищем собеседника в private чате
 function getCompanion(chat, currentUserId) {
@@ -47,7 +38,7 @@ function formatChatUser(chat, companion) {
     let chatUser = null
 
     if (chat.type === "private" && companion) {
-        chatUser = formatUser(companion)
+        chatUser = serializePublicUser(companion)
     }
 
     return chatUser
@@ -59,7 +50,7 @@ function formatMessageSender(senderId) {
 
     // Если senderId популят — это объект пользователя
     if (senderId && senderId._id) {
-        sender = formatUser(senderId)
+        sender = serializePublicUser(senderId)
     }
 
     return sender
@@ -106,7 +97,7 @@ function formatChat(chat, currentUserId) {
         type: chat.type,
         user: formatChatUser(chat, companion), // только для private
         title: formatChatTitle(chat, companion),
-        members: chat.members.map((member) => formatUser(member)), // Все участники чата
+        members: chat.members.map((member) => serializePublicUser(member)), // Все участники чата
         lastMessage: formatLastMessage(chat.lastMessageId),
         createdAt: chat.createdAt.toISOString(),
         updatedAt: chat.updatedAt.toISOString()
@@ -117,14 +108,14 @@ function formatChat(chat, currentUserId) {
 const chatPopulate = [
     {
         path: "members",
-        select: "name email avatar" // Участники без лишних полей
+        select: "name username avatar" // Участники без лишних полей
     },
     {
         path: "lastMessageId",
         select: "text senderId createdAt",
         populate: {
             path: "senderId",
-            select: "name email avatar" // Сразу подтягиваем автора сообщения
+            select: "name username avatar" // Сразу подтягиваем автора сообщения
         }
     }
 ]
@@ -149,7 +140,7 @@ export async function GET() {
 
         // Ищем все чаты, в которых состоит текущий пользователь
         const chats = await Chat.find({
-            members: user.userId,
+            members: user.id,
         })
             .populate(chatPopulate) // Подтягиваем участников и последнее сообщение
             .sort({ updatedAt: -1 }) // Новые / обновлённые чаты сверху
@@ -157,7 +148,7 @@ export async function GET() {
 
         // Форматируем чаты под удобный формат для UI
         const formattedChats = chats.map((chat) =>
-            formatChat(chat, user.userId)
+            formatChat(chat, user.id)
         )
 
         // Возвращаем список чатов
@@ -202,7 +193,7 @@ export async function POST(req) {
         const { user, error } = await getUserFromRequest()
         if (error) return error
 
-        const currentUserId = user.userId
+        const currentUserId = user.id
 
         // Запрещаем создавать приватный чат с самим собой
         if (currentUserId === memberId) {
@@ -217,7 +208,7 @@ export async function POST(req) {
 
         // Проверяем, что пользователь, с которым создаём чат, существует
         const member = await User.findById(memberId)
-            .select("name email avatar")
+            .select("name username avatar")
             .lean()
 
         if (!member) {

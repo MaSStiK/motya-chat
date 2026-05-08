@@ -75,6 +75,7 @@ export default function Login({ setForm }) {
                 <TextInput
                     id="email"
                     name="email"
+                    autoComplete="username"
                     label="Email"
                     type="email"
                     icon={Mail} color="#7E6f6E"
@@ -88,6 +89,7 @@ export default function Login({ setForm }) {
                 <TextInput
                     id="password"
                     name="password"
+                    autoComplete="current-password"
                     label="Password"
                     type="password"
                     icon={Lock} color="#7E6f6E"

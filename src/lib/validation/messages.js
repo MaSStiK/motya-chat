@@ -1,5 +1,6 @@
 import USER_LIMITS from "./userLimits";
 
+// Ошибки с локализацией
 const messages = {
     ru: {
         validation_error: "Ошибка валидации",

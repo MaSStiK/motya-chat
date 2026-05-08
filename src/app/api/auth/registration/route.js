@@ -4,6 +4,22 @@ import MongoConnect from "@/lib/mongodb"
 import bcrypt from "bcryptjs"
 import User from "@/lib/mongodb/models/User"
 import { signToken } from "@/lib/auth"
+import { serializeUser } from "@/lib/serialization/user"
+import createUsername from "@/utils/createUsername"
+
+// Функция гарантирует что username будет уникальный
+async function generateUniqueUsername() {
+    let username = null
+    let exists = true
+
+    while (exists) {
+        username = createUsername()
+        const user = await User.findOne({ username })
+        if (!user) exists = false
+    }
+
+    return username
+}
 
 export async function POST(req) {
     try {
@@ -42,31 +58,30 @@ export async function POST(req) {
         // Хешируем пароль (salt rounds = 10)
         const hashedPassword = await bcrypt.hash(password, 10)
 
+        // Генерируем username
+        const username = await generateUniqueUsername()
+
         // Создаем пользователя в БД
         const user = await User.create({
             name: name,
+            username: username,
             email: email,
             password: hashedPassword
         })
 
         // Генерируем JWT токен
         const token = signToken({
-            userId: user._id.toString(),
+            id: user._id.toString(),
             email: user.email,
-            name: user.name
+            name: user.name,
+            username: user.username
         })
 
         // Формируем ответ
         const response = NextResponse.json(
             {
                 message: "Регистрация успешна",
-                user: {
-                    id: user._id.toString(),
-                    name: user.name,
-                    email: user.email,
-                    avatar: user.avatar,
-                    role: user.role
-                }
+                user: serializeUser(user)
             },
             { status: 201 }
         )
