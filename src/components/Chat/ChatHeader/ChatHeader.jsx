@@ -8,9 +8,12 @@ import "./ChatHeader.css"
 export default function ChatHeader() {
     const chatList = useAtomValue(chatListAtom)
     const activeChat = useAtomValue(activeChatAtom)
-    const chat = chatList.find(chat => chat.id === activeChat)
+    if (!activeChat) return null
 
+    const chat = chatList.find(chat => chat.id === activeChat)
     console.log(chat);
+
+    if (!activeChat) return <p>Чат не найден</p>
 
     return (
         <div className="chat-header">
