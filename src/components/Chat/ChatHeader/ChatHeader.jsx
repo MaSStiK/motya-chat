@@ -1,6 +1,6 @@
 "use client"
 import { useAtomValue } from "jotai"
-import { chatListAtom, activeChatAtom } from "@/atoms/app"
+import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import UserPreview from "@/components/UserPreview"
 
 import "./ChatHeader.css"

@@ -5,7 +5,7 @@ import ChatHeader from "./ChatHeader/ChatHeader"
 import ChatFooter from "./ChatFooter/ChatFooter"
 import MessageList from "./MessageList/MessageList"
 import { useAtom } from "jotai"
-import { activeChatAtom } from "@/atoms/app"
+import { activeChatAtom } from "@/atoms/store"
 
 import "./Chat.css"
 

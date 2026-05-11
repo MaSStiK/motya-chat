@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useDebounceAsync } from "@/lib/hooks/useDebounceAsync"
 import { useSetAtom } from "jotai"
-import { chatListAtom, activeChatAtom } from "@/atoms/app"
+import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
 import { AtSign, UserPlus } from "lucide-react"

@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { useAtom, useSetAtom } from "jotai"
-import { chatListAtom, activeChatAtom } from "@/atoms/app"
+import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import ChatListFeedback from "./ChatListFeedback/ChatListFeedback"
 import UserPreview from "@/components/UserPreview"
 

@@ -4,7 +4,7 @@ import UserPreview from "@/components/UserPreview"
 import useLogout from "./Logout"
 import { Settings, LogOut } from "lucide-react"
 import { useAtomValue } from "jotai"
-import { userAtom } from "@/atoms/app"
+import { userAtom } from "@/atoms/store"
 
 import "./Profile.css"
 

@@ -1,7 +1,7 @@
 "use client"
 import { useEffect } from "react"
 import { useSetAtom } from "jotai"
-import { userAtom } from "@/atoms/app"
+import { userAtom } from "@/atoms/store"
 
 export default function AuthProvider({ children, user }) {
     const setUser = useSetAtom(userAtom)

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useAtomValue, useSetAtom } from "jotai"
-import { activeChatAtom, messagesAtom } from "@/atoms/app"
+import { activeChatAtom, messagesAtom } from "@/atoms/store"
 import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
 
