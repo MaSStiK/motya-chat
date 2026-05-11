@@ -1,8 +1,8 @@
-import bcrypt from "bcryptjs"
 import MongoConnect from "@/lib/mongodb"
+import bcrypt from "bcryptjs"
+import { findUserByEmail } from "@/lib/mongodb/controllers/userController"
 import { signToken } from "@/lib/auth"
 import { serializeUser } from "@/lib/serialization/user"
-import { findUserByEmail } from "@/lib/mongodb/controllers/userController"
 
 export async function loginUser(data) {
     // Если всё прошло - берём уже проверенные и очищенные данные

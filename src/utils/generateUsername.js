@@ -37,7 +37,7 @@ const tags = [
 ]
 
 // Возвращает никнейм в формате tag-tag-tag
-function getUsername() {
+export function getUsername() {
     return Array.from(
         { length: 3 },
         () => randomChoice(tags)
@@ -45,7 +45,7 @@ function getUsername() {
 }
 
 // Функция гарантирует что username будет уникальный
-export default async function generateUsername() {
+export async function generateUsername() {
     let username = null
     let exists = true
 

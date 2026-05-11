@@ -1,6 +1,6 @@
 import MongoConnect from "@/lib/mongodb"
 import bcrypt from "bcryptjs"
-import generateUsername from "@/utils/generateUsername"
+import { generateUsername } from "@/utils/generateUsername"
 import { findUserByEmail, createUser } from "@/lib/mongodb/controllers/userController"
 import { signToken } from "@/lib/auth"
 import { serializeUser } from "@/lib/serialization/user"
