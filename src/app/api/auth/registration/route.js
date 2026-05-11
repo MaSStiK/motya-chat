@@ -29,7 +29,7 @@ export async function POST(req) {
         const response = NextResponse.json(
             {
                 message: "Регистрация успешна",
-                user: user
+                user
             },
             { status: 201 }
         )

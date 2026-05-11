@@ -2,7 +2,7 @@ import MongoConnect from "@/lib/mongodb"
 import bcrypt from "bcryptjs"
 import { generateUsername } from "@/utils/generateUsername"
 import { findUserByEmail, createUser } from "@/lib/mongodb/controllers/userController"
-import { signToken } from "@/lib/auth"
+import { createAuthToken } from "@/lib/auth"
 import { serializeUser } from "@/lib/serialization/user"
 
 export async function registerUser(data) {
@@ -26,22 +26,14 @@ export async function registerUser(data) {
 
     // Создаем пользователя в БД
     const user = await createUser({
-        name: name,
-        username: username,
-        email: email,
+        name,
+        username,
+        email,
         password: hashedPassword
-    })
-
-    // Генерируем JWT токен
-    const token = signToken({
-        id: user._id.toString(),
-        name: user.name,
-        username: user.username,
-        email: user.email
     })
 
     return {
         user: serializeUser(user),
-        token: token
+        token: createAuthToken(user)
     }
 }

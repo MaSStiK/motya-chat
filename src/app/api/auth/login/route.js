@@ -30,7 +30,7 @@ export async function POST(req) {
         const response = NextResponse.json(
             {
                 message: "Вход выполнен успешно",
-                user: user
+                user
             },
             { status: 200 }
         )

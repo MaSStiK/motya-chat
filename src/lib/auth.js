@@ -22,10 +22,18 @@ export function signToken(payload) {
 export function verifyToken(token) {
     try {
         return jwt.verify(token, JWT_SECRET)
-    } catch (error) {
-        console.error("verifyToken error", error);
+    } catch {
         return null
     }
+}
+
+export function createAuthToken(user) {
+    return signToken({
+        id: user._id.toString(),
+        name: user.name,
+        username: user.username,
+        email: user.email
+    })
 }
 
 export function setAuthCookie(response, token) {

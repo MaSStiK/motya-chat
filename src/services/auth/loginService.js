@@ -1,7 +1,7 @@
 import MongoConnect from "@/lib/mongodb"
 import bcrypt from "bcryptjs"
 import { findUserByEmail } from "@/lib/mongodb/controllers/userController"
-import { signToken } from "@/lib/auth"
+import { createAuthToken } from "@/lib/auth"
 import { serializeUser } from "@/lib/serialization/user"
 
 export async function loginUser(data) {
@@ -27,16 +27,8 @@ export async function loginUser(data) {
         throw new Error("INVALID_CREDENTIALS")
     }
 
-    // Генерируем JWT
-    const token = signToken({
-        id: user._id.toString(),
-        email: user.email,
-        name: user.name,
-        username: user.username
-    })
-
     return {
         user: serializeUser(user),
-        token
+        token: createAuthToken(user)
     }
 }
