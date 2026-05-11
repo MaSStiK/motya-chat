@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { getUserFromRequest } from "@/lib/getUserFromRequest"
 import isValidObjectId from "@/lib/validation/isValidObjectId"
-import { getUserChats, createPrivateChat } from "@/services/chat/chatService"
+import { getUserChats, createPrivateChat } from "@/services/chatService"
 
 export async function GET() {
     try {
