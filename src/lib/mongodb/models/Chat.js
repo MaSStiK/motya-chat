@@ -26,7 +26,7 @@ const ChatSchema = new Schema({
         maxlength: 128,
         default: null
     },
-    lastMessageId: {
+    lastMessage: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Message",
         default: null

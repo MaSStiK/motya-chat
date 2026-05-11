@@ -1,4 +1,13 @@
 import User from "@/lib/mongodb/models/User"
+import { userPreviewSelect } from "@/lib/mongodb/selects/userSelects"
+
+export async function createUser(data) {
+    return User.create(data)
+}
+
+export async function findUserById(userId) {
+    return User.findById(userId)
+}
 
 export async function findUserByEmail(email) {
     return User.findOne({ email })
@@ -6,8 +15,4 @@ export async function findUserByEmail(email) {
 
 export async function findUserByUsername(username) {
     return User.findOne({ username })
-}
-
-export async function createUser(data) {
-    return User.create(data)
 }

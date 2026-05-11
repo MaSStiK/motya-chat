@@ -10,7 +10,7 @@ export async function getUserFromRequest() {
     if (!token) {
         return {
             error: NextResponse.json(
-                { message: "Не авторизован" },
+                { message: "Вы не авторизованы" },
                 { status: 401 }
             )
         }

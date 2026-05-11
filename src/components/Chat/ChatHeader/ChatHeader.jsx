@@ -13,12 +13,14 @@ export default function ChatHeader() {
     const chat = chatList.find(chat => chat.id === activeChat)
     if (!activeChat) return <p>Чат не найден</p>
 
+
     return (
         <div className="chat-header">
             <UserPreview
                 avatar={chat.title}
                 name={chat.title}
-                subtext="Был недавно"
+                subtext={chat.companion.username}
+                // subtext="Был недавно"
             />
         </div>
     )
