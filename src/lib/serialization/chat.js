@@ -16,8 +16,8 @@ function formatLastMessage(message) {
     return {
         id: message._id.toString(),
         text: message.text,
-        senderId: message.senderId._id.toString(),
-        sender: serializePublicUser(message.senderId),
+        senderId: message.sender._id.toString(),
+        sender: serializePublicUser(message.sender),
         createdAt: message.createdAt.toISOString()
     }
 }

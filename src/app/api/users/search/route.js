@@ -45,6 +45,7 @@ export async function GET(req) {
         }
 
         console.error("Search user error:", error)
+
         return NextResponse.json(
             { message: "Ошибка сервера" },
             { status: 500 }

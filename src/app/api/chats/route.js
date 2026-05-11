@@ -76,6 +76,7 @@ export async function POST(req) {
         }
 
         console.error("Create chat error:", error)
+
         return NextResponse.json(
             { message: "Ошибка сервера" },
             { status: 500 }

@@ -6,6 +6,13 @@ export async function createChat(data) {
     return Chat.create(data)
 }
 
+export async function updateChatLastMessage(chatId, messageId) {
+    return Chat.findByIdAndUpdate(chatId, {
+        lastMessage: messageId,
+        updatedAt: new Date()
+    })
+}
+
 export async function findChatsByUserId(userId) {
     return Chat.find({ members: userId })
         .populate(chatPopulate) // Подтягиваем участников и последнее сообщение
@@ -19,7 +26,9 @@ export async function findPrivateChatByKey(privateKey) {
         .lean()
 }
 
-export async function findChatById(chatId) {
+export async function findChatById(chatId, raw = false) {
+    if (raw) return Chat.findById(chatId)
+
     return Chat.findById(chatId)
         .populate(chatPopulate)
         .lean()

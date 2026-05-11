@@ -1,24 +1,25 @@
 import { NextResponse } from "next/server"
 import { getUserFromRequest } from "@/lib/getUserFromRequest"
-import MongoConnect from "@/lib/mongodb"
-import Chat from "@/lib/mongodb/models/Chat"
-import Message from "@/lib/mongodb/models/Message"
+import isValidObjectId from "@/lib/validation/isValidObjectId"
+import { sendMessage } from "@/services/messageService"
 
-export async function POST(req) {
+export async function POST(req, { params }) {
     try {
-        const body = await req.json()
-        const { chatId, text } = body
+        const { chatId } = await params
 
-        // Проверяем, что id чата передан
-        if (!chatId) {
+        // Проверяем, что id чата валидный для MongoDB
+        if (!isValidObjectId(chatId)) {
             return NextResponse.json(
-                { message: "Не указан chatId" },
+                { message: "Некорректный ID чата" },
                 { status: 400 }
             )
         }
 
+        const body = await req.json()
+        const { text } = body
+
         // Проверяем, что текст сообщения передан
-        if (!text) {
+        if (!text || !text.trim()) {
             return NextResponse.json(
                 { message: "Не указан текст сообщения" },
                 { status: 400 }
@@ -28,54 +29,32 @@ export async function POST(req) {
         const { user, error } = await getUserFromRequest()
         if (error) return error
 
-        await MongoConnect()
+        // Отправляем сообщение
+        const message = await sendMessage({
+            chatId,
+            text,
+            senderId: user.id
+        })
 
-        // Проверяем чат
-        const chat = await Chat.findById(chatId)
-
-        if (!chat) {
+        return NextResponse.json(
+            { message },
+            { status: 201 }
+        )
+    } catch (error) {
+        if (error.message === "CHAT_NOT_FOUND") {
             return NextResponse.json(
                 { message: "Чат не найден" },
                 { status: 404 }
             )
         }
 
-        // Проверяем, что пользователь участник чата
-        const isMember = chat.members.some(
-            (memberId) => memberId.toString() === user.id
-        )
-
-        if (!isMember) {
+        if (error.message === "CHAT_ACCESS_DENIED") {
             return NextResponse.json(
                 { message: "Нет доступа к чату" },
                 { status: 403 }
             )
         }
 
-        // Создаём сообщение
-        const message = await Message.create({
-            chatId,
-            senderId: user.id,
-            text,
-            readBy: [user.id] // Отправитель уже прочитал
-        })
-
-        // Обновляем чат
-        await Chat.findByIdAndUpdate(chatId, {
-            lastMessage: message._id,
-            updatedAt: new Date()
-        })
-
-        // Возвращаем сообщение
-        const populatedMessage = await Message.findById(message._id)
-            .populate("senderId", "name username avatar")
-            .lean()
-
-        return NextResponse.json(
-            { message: populatedMessage },
-            { status: 201 }
-        )
-    } catch (error) {
         console.error("Send message error:", error)
 
         return NextResponse.json(

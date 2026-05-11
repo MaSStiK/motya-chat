@@ -46,6 +46,7 @@ export async function POST(req) {
         }
 
         console.error("Login error:", error)
+
         return NextResponse.json(
             { message: "Ошибка сервера" },
             { status: 500 }
