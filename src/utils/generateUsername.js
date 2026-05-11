@@ -1,4 +1,5 @@
 import { randomChoice } from "./random"
+import { findUserByUsername } from "@/lib/mongodb/controllers/userController"
 
 const tags = [
     "alpha", "bravo", "charlie", "delta", "echo", "foxtrot",
@@ -35,9 +36,24 @@ const tags = [
     "surge", "core", "pulse", "ghost", "zen"
 ]
 
-export default function createUsername() {
+// Возвращает никнейм в формате tag-tag-tag
+function getUsername() {
     return Array.from(
         { length: 3 },
         () => randomChoice(tags)
     ).join("-")
+}
+
+// Функция гарантирует что username будет уникальный
+export default async function generateUsername() {
+    let username = null
+    let exists = true
+
+    while (exists) {
+        username = getUsername()
+        const user = await findUserByUsername(username)
+        if (!user) exists = false
+    }
+
+    return username
 }

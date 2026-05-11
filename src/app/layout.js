@@ -1,4 +1,4 @@
-import { montserrat, _metadata, _viewport } from "@/metadata/metadata"
+import { montserrat, _metadata, _viewport } from "@/app/metadata"
 
 import "@/app/styles/style.css"
 
