@@ -1,4 +1,5 @@
 import Chat from "@/lib/mongodb/models/Chat"
+import Message from "@/lib/mongodb/models/Message"
 import { chatPopulate } from "@/lib/mongodb/populates/chatPopulate"
 
 export async function createChat(data) {

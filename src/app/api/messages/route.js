@@ -48,7 +48,7 @@ export async function POST(req) {
             readBy: [user.id]
         })
 
-        chat.lastMessageId = message._id
+        chat.lastMessage = message._id
         await chat.save()
 
         return NextResponse.json(

@@ -62,7 +62,7 @@ export async function POST(req) {
 
         // Обновляем чат
         await Chat.findByIdAndUpdate(chatId, {
-            lastMessageId: message._id,
+            lastMessage: message._id,
             updatedAt: new Date()
         })
 

@@ -13,9 +13,6 @@ function getCompanion(chat, currentUserId) {
 function formatLastMessage(message) {
     if (!message) return null
 
-    console.log("message", message);
-    
-
     return {
         id: message._id.toString(),
         text: message.text,

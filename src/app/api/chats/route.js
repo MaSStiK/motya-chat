@@ -61,8 +61,6 @@ export async function POST(req) {
             { status: result.isNew ? 201 : 200 }
         )
     } catch (error) {
-        console.error("Create chat error:", error)
-
         if (error.message === "CHAT_WITH_SELF") {
             return NextResponse.json(
                 { message: "Нельзя создать чат с самим собой" },
@@ -77,6 +75,7 @@ export async function POST(req) {
             )
         }
 
+        console.error("Create chat error:", error)
         return NextResponse.json(
             { message: "Ошибка сервера" },
             { status: 500 }

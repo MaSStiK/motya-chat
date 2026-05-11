@@ -38,8 +38,6 @@ export async function POST(req) {
         setAuthCookie(response, token)
         return response
     } catch (error) {
-        console.error(error)
-
         if (error.message === "INVALID_CREDENTIALS") {
             return NextResponse.json(
                 { message: "Неверный email или пароль" },
@@ -47,6 +45,7 @@ export async function POST(req) {
             )
         }
 
+        console.error("Login error:", error)
         return NextResponse.json(
             { message: "Ошибка сервера" },
             { status: 500 }

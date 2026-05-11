@@ -1,5 +1,4 @@
 import User from "@/lib/mongodb/models/User"
-import { userPreviewSelect } from "@/lib/mongodb/selects/userSelects"
 
 export async function createUser(data) {
     return User.create(data)

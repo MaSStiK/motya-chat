@@ -6,7 +6,7 @@ export const chatPopulate = [
         select: userPreviewSelect // Участники без лишних полей
     },
     {
-        path: "lastMessageId",
+        path: "lastMessage",
         select: "text senderId createdAt",
         populate: {
             path: "senderId",

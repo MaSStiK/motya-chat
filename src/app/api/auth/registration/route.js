@@ -37,8 +37,6 @@ export async function POST(req) {
         setAuthCookie(response, token)
         return response
     } catch (error) {
-        console.error(error)
-
         // Обработка дубликата (уникальный email)
         if (error.code === 11000 || error.message === "USER_ALREADY_EXISTS") {
             return NextResponse.json(
@@ -47,6 +45,7 @@ export async function POST(req) {
             )
         }
 
+        console.error("Registration error:", error)
         return NextResponse.json(
             { message: "Ошибка сервера" },
             { status: 500 }

@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 import MongoConnect from "@/lib/mongodb"
-import User from "@/lib/mongodb/models/User"
 import { verifyToken } from "@/lib/auth"
+import { findUserById } from "@/lib/mongodb/controllers/userController"
 import { serializeUser } from "@/lib/serialization/user"
 
 
@@ -18,7 +18,8 @@ export default async function getCurrentUser() {
 
         await MongoConnect()
 
-        const user = await User.findById(payload.id).select("-password")
+        // Находим текущего пользователя
+        const user = await findUserById(payload.id)
         if (!user) return null
 
         // Преобразуем mongoose document в обычный объект
