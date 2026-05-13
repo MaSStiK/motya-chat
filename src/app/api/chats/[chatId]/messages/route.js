@@ -1,7 +1,56 @@
 import { NextResponse } from "next/server"
 import { getUserFromRequest } from "@/lib/getUserFromRequest"
 import isValidObjectId from "@/lib/validation/isValidObjectId"
-import { sendMessage } from "@/services/messageService"
+import { getChatMessages, sendMessage } from "@/services/messageService"
+
+export async function GET(req, { params }) {
+    try {
+        const { chatId } = await params
+
+        // Проверяем, что id чата валидный для MongoDB
+        if (!isValidObjectId(chatId)) {
+            return NextResponse.json(
+                { message: "Некорректный ID чата" },
+                { status: 400 }
+            )
+        }
+
+        const { user, error } = await getUserFromRequest()
+        if (error) return error
+
+        // Получаем последние сообщения чата
+        const messages = await getChatMessages({
+            chatId,
+            userId: user.id
+        })
+
+        return NextResponse.json(
+            { messages },
+            { status: 200 }
+        )
+    } catch (error) {
+        if (error.message === "CHAT_NOT_FOUND") {
+            return NextResponse.json(
+                { message: "Чат не найден" },
+                { status: 404 }
+            )
+        }
+
+        if (error.message === "CHAT_ACCESS_DENIED") {
+            return NextResponse.json(
+                { message: "Нет доступа к чату" },
+                { status: 403 }
+            )
+        }
+
+        console.error("Get messages error:", error)
+
+        return NextResponse.json(
+            { message: "Ошибка сервера" },
+            { status: 500 }
+        )
+    }
+}
 
 export async function POST(req, { params }) {
     try {

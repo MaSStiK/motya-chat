@@ -1,9 +1,23 @@
 import MongoConnect from "@/lib/mongodb"
 import bcrypt from "bcryptjs"
-import { generateUsername } from "@/utils/generateUsername"
-import { findUserByEmail, createUser } from "@/lib/mongodb/controllers/userController"
+import { getUsername } from "@/utils/getUsername"
+import { findUserByEmail, findUserByUsername, createUser } from "@/lib/mongodb/controllers/userController"
 import { createAuthToken } from "@/lib/auth"
 import { serializeUser } from "@/lib/serialization/user"
+
+// Функция гарантирует что username будет уникальный
+async function generateUsername() {
+    let username = null
+    let exists = true
+
+    while (exists) {
+        username = getUsername()
+        const user = await findUserByUsername(username)
+        if (!user) exists = false
+    }
+
+    return username
+}
 
 export async function registerUser(data) {
     // Если всё прошло - берём уже проверенные и очищенные данные

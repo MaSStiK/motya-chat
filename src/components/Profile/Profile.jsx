@@ -1,6 +1,6 @@
 "use client"
 import Button from "@/components/UI/Button/Button"
-import UserPreview from "@/components/UserPreview"
+import UserPreview from "@/components/UserPreview/UserPreview"
 import useLogout from "./Logout"
 import { Settings, LogOut } from "lucide-react"
 import { useAtomValue } from "jotai"

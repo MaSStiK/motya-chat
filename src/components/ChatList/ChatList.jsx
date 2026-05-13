@@ -3,7 +3,8 @@ import { useEffect, useState } from "react"
 import { useAtom, useSetAtom } from "jotai"
 import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import ChatListFeedback from "./ChatListFeedback/ChatListFeedback"
-import UserPreview from "@/components/UserPreview"
+import UserPreview from "@/components/UserPreview/UserPreview"
+import { formatChatDate } from "@/utils/formatDate"
 
 import "./ChatList.css"
 
@@ -12,6 +13,9 @@ export default function ChatList() {
     const setActiveChat = useSetAtom(activeChatAtom)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
+
+    // console.log(JSON.stringify(chatList, null, 4));
+
 
     useEffect(() => {
         const fetchChats = async () => {
@@ -40,7 +44,8 @@ export default function ChatList() {
     }, [])
     
     function openChat(chatID) {
-        setActiveChat(chatID)
+        const chat = chatList.find(chat => chat.id === chatID)
+        setActiveChat(chat)
     }
 
     if (loading) return <ChatListFeedback text="Загрузка чатов" />
@@ -50,12 +55,18 @@ export default function ChatList() {
     return (
         <div className="flex-col">
             {chatList.map((chat) => (
-                <button className="flex-row gap-3 chat-list__item" key={chat.id} onClick={() => openChat(chat.id)}>
+                <button className="flex-row chat-list__item" key={chat.id} onClick={() => openChat(chat.id)}>
                     <UserPreview
                         avatar={chat.title}
                         name={chat.title}
                         subtext={chat.lastMessage ? chat.lastMessage.text : "Нет сообщений"}
                     />
+                    {chat.lastMessage && (
+                        <div className="chat-list__item-time">
+                            <span className="fs-tiny text-gray">{formatChatDate(chat.lastMessage.createdAt)}</span>
+                        </div>
+                        // TODO: добавить статус прочтения
+                    )}
                 </button>
             ))}
         </div>

@@ -1,19 +1,18 @@
-import { useSetAtom } from "jotai"
-import { userAtom } from "@/atoms/store"
+import useResetAppState from "@/atoms/resetAppState"
 import { useRouter } from "next/navigation"
 
 export default function useLogout() {
-    const setUser = useSetAtom(userAtom)
+    const resetAppState = useResetAppState()
     const router = useRouter()
 
     return async function logout() {
         try {
             await fetch("/api/auth/logout", {
-                method: "POST",
+                method: "POST"
             })
 
-            // Очищаем пользователя в UI
-            setUser(null)
+            // Очищаем состояние приложения
+            resetAppState()
 
             // Редирект
             router.push("/auth")

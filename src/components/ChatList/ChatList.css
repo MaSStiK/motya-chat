@@ -1,4 +1,5 @@
 .chat-list__item {
+    justify-content: space-between;
     padding: var(--gap-3);
     text-align: left;
 }
@@ -14,4 +15,11 @@
 
 .chat-list__item.active {
     background-color: var(--bg-dark-red);
+}
+
+/* Время справа от сообщения и статус прочтения */
+.chat-list__item-time {
+    /* Одинаковый отступ что бы компенсировать разную ширину цифр */
+    min-width: 50px;
+    text-align: right;
 }

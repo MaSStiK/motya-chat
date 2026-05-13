@@ -1,4 +1,5 @@
 import { serializePublicUser } from "@/lib/serialization/user"
+import { formatMessage } from "@/lib/serialization/message"
 
 // Ищем собеседника в private чате
 function getCompanion(chat, currentUserId) {
@@ -10,16 +11,10 @@ function getCompanion(chat, currentUserId) {
 }
 
 // Формируем последнее сообщение
-function formatLastMessage(message) {
+function formatLastMessage(message, currentUserId) {
     if (!message) return null
 
-    return {
-        id: message._id.toString(),
-        text: message.text,
-        senderId: message.sender._id.toString(),
-        sender: serializePublicUser(message.sender),
-        createdAt: message.createdAt.toISOString()
-    }
+    return formatMessage(message, currentUserId)
 }
 
 // Универсальный форматтер чата для ответа API
@@ -46,7 +41,12 @@ export function formatChat(chat, currentUserId) {
             ? serializePublicUser(companion)
             : null,
 
-        lastMessage: formatLastMessage(chat.lastMessage),
+        // Последнее сообщение чата
+        lastMessage: formatLastMessage(
+            chat.lastMessage,
+            currentUserId
+        ),
+
         createdAt: chat.createdAt.toISOString(),
         updatedAt: chat.updatedAt.toISOString()
     }

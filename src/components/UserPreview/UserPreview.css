@@ -1,0 +1,8 @@
+.user-preview {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.user-preview__content {
+    min-width: 0;
+}

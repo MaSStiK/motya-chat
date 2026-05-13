@@ -82,14 +82,12 @@ export default function AddChat({ onClose }) {
                 return
             }
 
-            console.log("Chat created:", data)
-
             // Если чат новый - добавляем его в список чатов
             if (data.isNew) {
                 setChatList(prev => [...prev, data.chat])
-                setActiveChat(data.chat.id)
+                setActiveChat(data.chat)
             } else {
-                setActiveChat(data.chat.id)
+                setActiveChat(data.chat)
             }
 
             // Чат создан или найден - закрытые модального окна

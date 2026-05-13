@@ -75,9 +75,9 @@ p, .p, span, label { font-size: var(--fs-medium); line-height: 1.5; }
 .text-pre { white-space: pre-wrap; }
 
 /* Текст обрезаемый контейнером */
-.text-cut {
-    white-space: nowrap;
+.text-ellipsis {
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 

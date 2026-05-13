@@ -1,25 +1,20 @@
 "use client"
 import { useAtomValue } from "jotai"
-import { chatListAtom, activeChatAtom } from "@/atoms/store"
-import UserPreview from "@/components/UserPreview"
+import { activeChatAtom } from "@/atoms/store"
+import UserPreview from "@/components/UserPreview/UserPreview"
 
 import "./ChatHeader.css"
 
 export default function ChatHeader() {
-    const chatList = useAtomValue(chatListAtom)
-    const activeChat = useAtomValue(activeChatAtom)
-    if (!activeChat) return null
-
-    const chat = chatList.find(chat => chat.id === activeChat)
+    const activeChat = useAtomValue(activeChatAtom)    
     if (!activeChat) return <p>Чат не найден</p>
-
 
     return (
         <div className="chat-header">
             <UserPreview
-                avatar={chat.title}
-                name={chat.title}
-                subtext={chat.companion.username}
+                avatar={activeChat.title}
+                name={activeChat.title}
+                subtext={`@${activeChat.companion.username}`}
                 // subtext="Был недавно"
             />
         </div>

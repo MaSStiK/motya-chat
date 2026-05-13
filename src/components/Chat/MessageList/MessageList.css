@@ -13,7 +13,7 @@
 }
 
 .message {
-    /* Цвета фона сообщения не от текущего юзера */
+    /* Цвета фона сообщения если не fromMe */
     --bg-message: #280B0B;
     width: fit-content;
     max-width: 430px;
@@ -22,7 +22,12 @@
     background-color: var(--bg-message);
 }
 
-/* Если сообщение от текущего юзера */
+/* Если сообщение fromMe */
 .message.message--from-me {
     background-color: var(--bg-dark-red);
+}
+
+/* Время отправки сообщения */
+.message__meta {
+    text-align: right;
 }

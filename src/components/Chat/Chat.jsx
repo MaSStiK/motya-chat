@@ -2,8 +2,8 @@
 import { useEffect } from "react"
 import SelectChat from "./SelectChat/SelectChat"
 import ChatHeader from "./ChatHeader/ChatHeader"
-import ChatFooter from "./ChatFooter/ChatFooter"
 import MessageList from "./MessageList/MessageList"
+import ChatFooter from "./ChatFooter/ChatFooter"
 import { useAtom } from "jotai"
 import { activeChatAtom } from "@/atoms/store"
 
@@ -12,6 +12,7 @@ import "./Chat.css"
 export default function Chat() {
     const [activeChat, setActiveChat] = useAtom(activeChatAtom)
     
+    // Закрытие чата при нажатии ESC
     useEffect(() => {
         if (!activeChat) return // Чат закрыт
 

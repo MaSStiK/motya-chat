@@ -1,4 +1,6 @@
 .profile-avatar {
+    min-width: 48px;
+    min-height: 48px;
     width: 48px;
     height: 48px;
     display: flex;

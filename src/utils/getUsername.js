@@ -1,5 +1,4 @@
 import { randomChoice } from "./random"
-import { findUserByUsername } from "@/lib/mongodb/controllers/userController"
 
 const tags = [
     "alpha", "bravo", "charlie", "delta", "echo", "foxtrot",
@@ -42,18 +41,4 @@ export function getUsername() {
         { length: 3 },
         () => randomChoice(tags)
     ).join("-")
-}
-
-// Функция гарантирует что username будет уникальный
-export async function generateUsername() {
-    let username = null
-    let exists = true
-
-    while (exists) {
-        username = getUsername()
-        const user = await findUserByUsername(username)
-        if (!user) exists = false
-    }
-
-    return username
 }

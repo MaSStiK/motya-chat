@@ -10,3 +10,11 @@ export async function findMessageById(messageId) {
         .populate("sender", userPreviewSelect)
         .lean()
 }
+
+export async function findLastMessagesByChatId(chatId, limit = 50) {
+    return Message.find({ chat: chatId })
+        .populate("sender", userPreviewSelect)
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .lean()
+}
