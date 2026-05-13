@@ -11,9 +11,6 @@ export default function MessageList() {
     const activeChat = useAtomValue(activeChatAtom)
     const [messages, setMessages] = useAtom(messagesAtom)
 
-    console.log(JSON.stringify(messages, null, 4));
-    
-
     const bottomRef = useRef(null)
     const isFirstRender = useRef(true)
 

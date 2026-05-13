@@ -14,9 +14,6 @@ export default function ChatList() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
 
-    // console.log(JSON.stringify(chatList, null, 4));
-
-
     useEffect(() => {
         const fetchChats = async () => {
             try {
