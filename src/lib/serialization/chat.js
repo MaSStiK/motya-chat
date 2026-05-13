@@ -12,7 +12,13 @@ function getCompanion(chat, currentUserId) {
 
 // Формируем последнее сообщение
 function formatLastMessage(message, currentUserId) {
-    if (!message) return null
+    // Сообщение было удалено
+    if (!message) {
+        return {
+            text: "Сообщение удалено",
+            isDeleted: true
+        }
+    }
 
     return formatMessage(message, currentUserId)
 }

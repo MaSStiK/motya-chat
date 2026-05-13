@@ -36,7 +36,7 @@ const tags = [
 ]
 
 // Возвращает никнейм в формате tag-tag-tag
-export function getUsername() {
+export default function getUsername() {
     return Array.from(
         { length: 3 },
         () => randomChoice(tags)
