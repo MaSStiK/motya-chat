@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation"
 import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
 import USER_LIMITS from "@/lib/validation/userLimits"
-import { Send, User, Mail, Lock, Chrome } from "lucide-react"
+import { Send, User, Mail, Lock } from "lucide-react"
+import { FaGoogle } from "react-icons/fa"
 
 export default function Registration({ setForm }) {
     const router = useRouter()
@@ -133,14 +134,17 @@ export default function Registration({ setForm }) {
             <Button
                 text="Войти через Google"
                 className="outlined"
-                icon={Chrome}
+                icon={FaGoogle}
+                href="/api/auth/google"
                 width100
                 big
             />
-            {/* <a href="/api/auth/google">Войти через Google</a> */}
 
             <div className="auth__change-form">
-                <button className="fs-small text-accent text-hover-underline" onClick={() => setForm("login")}>Уже есть аккаунт? Войдите</button>
+                <button
+                    className="fs-small text-accent text-hover-underline"
+                    onClick={() => setForm("login")}
+                >Уже есть аккаунт? Войдите</button>
             </div>
         </div>
     )

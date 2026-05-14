@@ -125,7 +125,10 @@ export default function Login({ setForm }) {
             />
             
             <div className="auth__change-form">
-                <button className="fs-small text-accent text-hover-underline" onClick={() => setForm("registration")}>Нет аккаунта? Зарегистрируйтесь</button>
+                <button
+                    className="fs-small text-accent text-hover-underline"
+                    onClick={() => setForm("registration")}
+                >Нет аккаунта? Зарегистрируйтесь</button>
             </div>
         </div>
     )
