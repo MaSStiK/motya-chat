@@ -1,3 +1,4 @@
+@import "./base/colors.css";
 @import "./base/typography.css";
 @import "./base/flex.css";
 @import "./base/elements.css";
@@ -12,15 +13,11 @@
     --bg-primary:     #24182C; /* Фон Body */
     --bg-secondary:   #220C0C; /* Фон Sidebar */
     --bg-accent:      #301615; /* Акцентный цвет (для фона инпута и верхней части сайта) */
-    --bg-light-red:   #EE3F48; /* Ярко красный */
-    --bg-dark-red:    #601012; /* Ярко красный */
     --bg-transparent: #0E1113CC; /* Пока не используется (для анимации загрузки поверх контента) */
 
     /* Бордеры */
-    --border-primary:   #1F2937; /* Header и Sidebar */
-    --border-secondary: #3F4143; /* Внутри контента */
-    --border-accent:    #ee3f4827;
-    /* rgba(255, 182, 193, 0.2) */
+    --border-primary: #3F4143;
+    --border-accent:  #ee3f4827;
 
     --border-radius: 14px;
     --border-radius-small: 10px;
@@ -73,5 +70,5 @@ body {
 /* Маркер прокрутки */
 *::-webkit-scrollbar-thumb {
     border-radius: 4px;
-    background-color: var(--border-secondary);
+    background-color: var(--border-primary);
 }

@@ -1,5 +1,5 @@
 // Приватные данные пользователя
-export function serializeUser(user) {
+export function formatUser(user) {
     return {
         id: user._id?.toString?.() || user.id,
         name: user.name,
@@ -11,7 +11,7 @@ export function serializeUser(user) {
 }
 
 // Публичные данные пользователя
-export function serializePublicUser(user) {
+export function formatPublicUser(user) {
     return {
         id: user._id?.toString?.() || user.id,
         name: user.name,

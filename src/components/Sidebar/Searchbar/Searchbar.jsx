@@ -17,7 +17,7 @@ export default function Searchbar() {
                 <TextInput
                     type="text"
                     placeholder="Поиск..."
-                    icon={Search} color="#7E6f6E"
+                    icon={Search} color="var(--gray-dark)"
                     width100
                 />
                 <Button

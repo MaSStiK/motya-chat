@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs"
 import generateUsername from "@/utils/generateUsername"
 import { createUser, findUserByEmail } from "@/lib/mongodb/controllers/userController"
 import { createAuthToken } from "@/lib/auth"
-import { serializeUser } from "@/lib/serialization/user"
+import { formatUser } from "@/lib/serialization/user"
 
 export async function registerUser(data) {
     // Если всё прошло - берём уже проверенные и очищенные данные
@@ -33,7 +33,7 @@ export async function registerUser(data) {
     })
 
     return {
-        user: serializeUser(user),
+        user: formatUser(user),
         token: createAuthToken(user)
     }
 }

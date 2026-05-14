@@ -18,3 +18,17 @@ export async function findLastMessagesByChatId(chatId, limit = 50) {
         .limit(limit)
         .lean()
 }
+
+export async function countUnreadMessages(chatId, userId, lastReadAt) {
+    return Message.countDocuments({
+        chat: chatId,
+
+        // Не считаем свои сообщения
+        sender: { $ne: userId },
+
+        // Только непрочитанные
+        createdAt: {
+            $gt: lastReadAt || new Date(0)
+        }
+    })
+}

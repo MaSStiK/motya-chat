@@ -35,6 +35,20 @@ const ChatSchema = new Schema({
         default: null
     },
 
+    readState: [
+        {
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+                required: true
+            },
+            lastReadAt: {
+                type: Date,
+                default: null
+            }
+        }
+    ],
+
     privateKey: {
         type: String,
         trim: true,

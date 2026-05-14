@@ -1,7 +1,7 @@
 :root {
-    --input-background: #301615;
+    --input-background: var(--bg-accent);
     --input-border: #561e1e;
-    --input-focus-border: #F5F5F5;
+    --input-focus-border: var(--light);
     --input-error-border: #D60027;
     --range-thumb: #999999;
 

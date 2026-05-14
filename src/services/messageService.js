@@ -1,6 +1,14 @@
 import MongoConnect from "@/lib/mongodb"
-import { findChatById, updateChatLastMessage } from "@/lib/mongodb/controllers/chatController"
-import { createMessage, findMessageById, findLastMessagesByChatId } from "@/lib/mongodb/controllers/messageController"
+import {
+    findChatById,
+    updateChatLastMessage,
+    updateChatReadState
+} from "@/lib/mongodb/controllers/chatController"
+import {
+    createMessage,
+    findMessageById,
+    findLastMessagesByChatId,
+} from "@/lib/mongodb/controllers/messageController"
 import { formatMessage } from "@/lib/serialization/message"
 
 function isChatMember(chat, userId) {
@@ -25,13 +33,19 @@ export async function getChatMessages({ chatId, userId }) {
         throw new Error("CHAT_ACCESS_DENIED")
     }
 
+    // Отмечаем чат как прочитанный текущим пользователем
+    await updateChatReadState(chatId, userId)
+
+    // Получаем свежий чат уже с обновлённым readState
+    const updatedChat = await findChatById(chatId, true)
+
     // Получаем последние 50 сообщений чата
     const messages = await findLastMessagesByChatId(chatId, 50)
 
     return messages
         .reverse()
         .map((message) =>
-            formatMessage(message, userId)
+            formatMessage(message, userId, updatedChat.readState)
         )
 }
 
@@ -55,8 +69,7 @@ export async function sendMessage({ chatId, text, senderId }) {
     const message = await createMessage({
         chat: chatId,
         sender: senderId,
-        text: text.trim(),
-        readBy: [senderId] // Отправитель уже прочитал
+        text: text.trim()
     })
 
     // Обновляем чат

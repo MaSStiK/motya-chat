@@ -1,6 +1,12 @@
 import MongoConnect from "@/lib/mongodb"
 import { findUserById } from "@/lib/mongodb/controllers/userController"
-import { findChatsByUserId, findPrivateChatByKey, createChat, findChatById } from "@/lib/mongodb/controllers/chatController"
+import {
+    findChatsByUserId,
+    findPrivateChatByKey,
+    createChat,
+    findChatById
+} from "@/lib/mongodb/controllers/chatController"
+import { countUnreadMessages } from "@/lib/mongodb/controllers/messageController"
 import { formatChat } from "@/lib/serialization/chat"
 import { getPrivateKey } from "@/utils/getPrivateKey"
 
@@ -12,7 +18,28 @@ export async function getUserChats(userId) {
     const chats = await findChatsByUserId(userId)
 
     // Форматируем чаты под удобный формат для UI
-    return chats.map((chat) => formatChat(chat, userId))
+    return Promise.all(
+        chats.map(async (chat) => {
+            // Получаем read state текущего пользователя
+            const currentUserReadState = chat.readState.find(
+                (item) => item.user.toString() === userId
+            )
+
+            // Считаем количество непрочитанных сообщений
+            const unreadCount = await countUnreadMessages(
+                chat._id,
+                userId,
+                currentUserReadState?.lastReadAt
+            )
+
+            return {
+                ...formatChat(chat, userId),
+
+                // Количество непрочитанных сообщений
+                unreadCount
+            }
+        })
+    )
 }
 
 export async function createPrivateChat(currentUserId, memberId) {
@@ -52,6 +79,16 @@ export async function createPrivateChat(currentUserId, memberId) {
         chat = await createChat({
             type: "private",
             members: [currentUserId, memberId],
+            readState: [
+                {
+                    user: currentUserId,
+                    lastReadAt: null
+                },
+                {
+                    user: memberId,
+                    lastReadAt: null
+                }
+            ],
             privateKey
         })
     } catch (error) {

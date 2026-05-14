@@ -2,7 +2,7 @@ import { cookies } from "next/headers"
 import MongoConnect from "@/lib/mongodb"
 import { verifyToken } from "@/lib/auth"
 import { findUserById } from "@/lib/mongodb/controllers/userController"
-import { serializeUser } from "@/lib/serialization/user"
+import { formatUser } from "@/lib/serialization/user"
 
 
 // Функция используется в (main)/layout для получения актуальной информации о пользователе при старте приложения
@@ -23,7 +23,7 @@ export default async function getCurrentUser() {
         if (!user) return null
 
         // Преобразуем mongoose document в обычный объект
-        return serializeUser(user)
+        return formatUser(user)
     } catch (error) {
         console.error(error)
         return null

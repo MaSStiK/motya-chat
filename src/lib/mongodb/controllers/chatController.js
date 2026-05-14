@@ -13,6 +13,20 @@ export async function updateChatLastMessage(chatId, messageId) {
     })
 }
 
+export async function updateChatReadState(chatId, userId) {
+    return Chat.updateOne(
+        {
+            _id: chatId,
+            "readState.user": userId
+        },
+        {
+            $set: {
+                "readState.$.lastReadAt": new Date()
+            }
+        }
+    )
+}
+
 export async function findChatsByUserId(userId) {
     return Chat.find({ members: userId })
         .populate(chatPopulate) // Подтягиваем участников и последнее сообщение

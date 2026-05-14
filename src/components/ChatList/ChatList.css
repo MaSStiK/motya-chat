@@ -14,12 +14,23 @@
 }
 
 .chat-list__item.active {
-    background-color: var(--bg-dark-red);
+    background-color: var(--red-dark);
 }
 
 /* Время справа от сообщения и статус прочтения */
 .chat-list__item-time {
     /* Одинаковый отступ что бы компенсировать разную ширину цифр */
     min-width: 50px;
+    align-items: flex-end;
     text-align: right;
+}
+
+/* Кол-во непрочитанных сообщений */
+.chat-list__badge {
+    min-width: 18px;
+    height: 18px;
+    border-radius: 18px;
+    padding: 0 6px;
+    text-align: center;
+    background-color: #552424;
 }

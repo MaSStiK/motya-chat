@@ -13,7 +13,7 @@ export default function SelectChat() {
         <>
             <button className="select-chat" onClick={() => setIsModalOpen(true)}>
                 <div className="select-chat__image">
-                    <Send size={64} color="#ee3f48" />
+                    <Send size={64} color="var(--red-light)" />
                 </div>
                 <h2 className="text-light">Выберите чат</h2>
                 <span className="text-gray">Выберите чат из списка или создайте новый</span>

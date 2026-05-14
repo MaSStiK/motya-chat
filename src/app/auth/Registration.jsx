@@ -80,7 +80,7 @@ export default function Registration({ setForm }) {
                     autoComplete="name"
                     label="Имя"
                     type="text"
-                    icon={User} color="#7E6f6E"
+                    icon={User} color="var(--gray-dark)"
                     placeholder="Ваше имя"
                     minLength={USER_LIMITS.name.min}
                     maxLength={USER_LIMITS.name.max}
@@ -95,7 +95,7 @@ export default function Registration({ setForm }) {
                     autoComplete="email"
                     label="Email"
                     type="email"
-                    icon={Mail} color="#7E6f6E"
+                    icon={Mail} color="var(--gray-dark)"
                     placeholder="your@email.com"
                     maxLength={USER_LIMITS.email.max}
                     error={errors.email}
@@ -109,7 +109,7 @@ export default function Registration({ setForm }) {
                     autoComplete="new-password"
                     label="Password"
                     type="password"
-                    icon={Lock} color="#7E6f6E"
+                    icon={Lock} color="var(--gray-dark)"
                     placeholder="•••••••••"
                     minLength={USER_LIMITS.password.min}
                     maxLength={USER_LIMITS.password.max}

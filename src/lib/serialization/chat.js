@@ -1,4 +1,4 @@
-import { serializePublicUser } from "@/lib/serialization/user"
+import { formatPublicUser } from "@/lib/serialization/user"
 import { formatMessage } from "@/lib/serialization/message"
 
 // Ищем собеседника в private чате
@@ -11,16 +11,10 @@ function getCompanion(chat, currentUserId) {
 }
 
 // Формируем последнее сообщение
-function formatLastMessage(message, currentUserId) {
-    // Сообщение было удалено
-    if (!message) {
-        return {
-            text: "Сообщение удалено",
-            isDeleted: true
-        }
-    }
+function formatLastMessage(message, currentUserId, readState = []) {
+    if (!message) return null
 
-    return formatMessage(message, currentUserId)
+    return formatMessage(message, currentUserId, readState)
 }
 
 // Универсальный форматтер чата для ответа API
@@ -39,18 +33,19 @@ export function formatChat(chat, currentUserId) {
 
         // Все участники чата
         members: chat.members.map((member) =>
-            serializePublicUser(member)
+            formatPublicUser(member)
         ),
 
         // Информация о собеседнике, если приватный чат
         companion: companion
-            ? serializePublicUser(companion)
+            ? formatPublicUser(companion)
             : null,
 
         // Последнее сообщение чата
         lastMessage: formatLastMessage(
             chat.lastMessage,
-            currentUserId
+            currentUserId,
+            chat.readState
         ),
 
         createdAt: chat.createdAt.toISOString(),

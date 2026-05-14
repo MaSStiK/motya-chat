@@ -1,6 +1,8 @@
 "use client"
+
 import { useEffect, useState } from "react"
 import { useAtom, useSetAtom } from "jotai"
+import { Check, CheckCheck } from "lucide-react"
 import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import ChatListFeedback from "./ChatListFeedback/ChatListFeedback"
 import UserPreview from "@/components/UserPreview/UserPreview"
@@ -39,10 +41,29 @@ export default function ChatList() {
 
         fetchChats()
     }, [])
-    
-    function openChat(chatID) {
+
+    const openChat = (chatID) => {
         const chat = chatList.find(chat => chat.id === chatID)
-        setActiveChat(chat)
+        if (!chat) {
+            console.error("openChat: chat not found", chatID)
+            return
+        }
+
+        const updatedChat = {
+            ...chat,
+            unreadCount: 0
+        }
+
+        setActiveChat(updatedChat)
+
+        // Обнуляем unreadCount в атоме
+        setChatList((prev) =>
+            prev.map((chat) =>
+                chat.id === chatID
+                    ? updatedChat
+                    : chat
+            )
+        )
     }
 
     if (loading) return <ChatListFeedback text="Загрузка чатов" />
@@ -52,20 +73,44 @@ export default function ChatList() {
     return (
         <div className="flex-col">
             {chatList.map((chat) => (
-                <button className="flex-row chat-list__item" key={chat.id} onClick={() => openChat(chat.id)}>
+                <button
+                    key={chat.id}
+                    className="flex-row chat-list__item"
+                    onClick={() => openChat(chat.id)}
+                >
                     <UserPreview
                         avatar={chat.title}
                         name={chat.title}
-                        subtext={chat.lastMessage ? chat.lastMessage.text : "Нет сообщений"}
+                        subtext={chat.lastMessage?.text || "Нет сообщений"}
                     />
+
                     {chat.lastMessage && (
-                        <div className="chat-list__item-time">
-                            <span className="fs-tiny text-gray">{formatChatDate(chat.lastMessage.createdAt)}</span>
+                        <div className="flex-col gap-1 chat-list__item-time">
+                            <span className="fs-small text-brown">
+                                {formatChatDate(chat.lastMessage.createdAt)}
+                            </span>
+                            <ChatListStatus chat={chat} />
                         </div>
-                        // TODO: добавить статус прочтения
                     )}
                 </button>
             ))}
         </div>
+    )
+}
+
+function ChatListStatus({ chat }) {
+    if (chat.unreadCount > 0) {
+        return <span className="fs-tiny text-white chat-list__badge">{chat.unreadCount}</span>
+    }
+
+    if (!chat.lastMessage?.fromMe) return null
+
+    return (
+        <span>
+            {chat.lastMessage.isRead
+                ? <CheckCheck size={14} color="var(--gray-light)" />
+                : <Check size={14} color="var(--gray-light)" />
+            }
+        </span>
     )
 }

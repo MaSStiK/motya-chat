@@ -22,7 +22,7 @@
     width: 96px;
     height: 96px;
     border-radius: 48px;
-    background-color: var(--bg-light-red);
+    background-color: var(--red-light);
     display: flex;
     justify-content: center;
     align-items: center;

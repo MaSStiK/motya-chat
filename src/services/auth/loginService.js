@@ -2,7 +2,7 @@ import MongoConnect from "@/lib/mongodb"
 import bcrypt from "bcryptjs"
 import { findUserByEmail } from "@/lib/mongodb/controllers/userController"
 import { createAuthToken } from "@/lib/auth"
-import { serializeUser } from "@/lib/serialization/user"
+import { formatUser } from "@/lib/serialization/user"
 
 export async function loginUser(data) {
     // Если всё прошло - берём уже проверенные и очищенные данные
@@ -33,7 +33,7 @@ export async function loginUser(data) {
     }
 
     return {
-        user: serializeUser(user),
+        user: formatUser(user),
         token: createAuthToken(user)
     }
 }

@@ -24,7 +24,7 @@
 
 /* Если сообщение fromMe */
 .message.message--from-me {
-    background-color: var(--bg-dark-red);
+    background-color: var(--red-dark);
 }
 
 /* Время отправки сообщения */

@@ -1,6 +1,6 @@
 import MongoConnect from "@/lib/mongodb"
 import { findUserByUsername } from "@/lib/mongodb/controllers/userController"
-import { serializePublicUser } from "@/lib/serialization/user"
+import { formatPublicUser } from "@/lib/serialization/user"
 
 function normalizeUsername(query) {
     // Приводим username к нормальному виду
@@ -27,5 +27,5 @@ export async function searchUserByUsername(currentUsername, query) {
         throw new Error("USER_NOT_FOUND")
     }
 
-    return serializePublicUser(foundUser)
+    return formatPublicUser(foundUser)
 }

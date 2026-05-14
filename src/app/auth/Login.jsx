@@ -79,7 +79,7 @@ export default function Login({ setForm }) {
                     autoComplete="username"
                     label="Email"
                     type="email"
-                    icon={Mail} color="#7E6f6E"
+                    icon={Mail} color="var(--gray-dark)"
                     placeholder="your@email.com"
                     maxLength={USER_LIMITS.email.max}
                     error={errors.email}
@@ -93,7 +93,7 @@ export default function Login({ setForm }) {
                     autoComplete="current-password"
                     label="Password"
                     type="password"
-                    icon={Lock} color="#7E6f6E"
+                    icon={Lock} color="var(--gray-dark)"
                     placeholder="•••••••••"
                     minLength={USER_LIMITS.password.min}
                     maxLength={USER_LIMITS.password.max}

@@ -105,7 +105,7 @@ export default function AddChat({ onClose }) {
             <span className="text-center fs-xlarge fw-bold">Создать чат</span>
             <div>
                 <div className="add-chat__icon">
-                    <UserPlus size={48} color="#EE3F48" />
+                    <UserPlus size={48} color="var(--red-light)" />
                 </div>
                 <span className="text-center text-gray">Введите имя пользователя, с которым хотите начать чат</span>
             </div>
@@ -116,7 +116,7 @@ export default function AddChat({ onClose }) {
                         type="text"
                         placeholder="username"
                         icon={AtSign}
-                        color="#7E6f6E"
+                        color="var(--gray-dark)"
                         value={email}
                         onChange={handleChange}
                         error={searchError || createError}

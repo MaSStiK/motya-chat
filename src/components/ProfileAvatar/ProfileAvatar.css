@@ -6,7 +6,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: var(--bg-light-red); */
     color: var(--text-color);
     background-color: var(--bg-color);
     border-radius: 24px;

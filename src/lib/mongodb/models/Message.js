@@ -20,14 +20,7 @@ const MessageSchema = new mongoose.Schema({
         required: true,
         trim: true,
         maxlength: 4000
-    },
-
-    readBy: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        }
-    ]
+    }
 }, {
     timestamps: true
 })

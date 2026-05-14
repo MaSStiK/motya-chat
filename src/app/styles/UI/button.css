@@ -4,7 +4,7 @@
     --button-default-hover:   #4F5764;
     --button-green:           #2A6F54;
     --button-green-hover:     #389570;
-    --button-red:             #EE3F48;
+    --button-red:             var(--red-light);
     --button-red-hover:       #D73740;
     --button-tp:               transparent;
     --button-tp-hover:        #261211;

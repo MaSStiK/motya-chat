@@ -7,7 +7,7 @@ export const chatPopulate = [
     },
     {
         path: "lastMessage",
-        select: "chat text sender readBy createdAt updatedAt",
+        select: "chat text sender createdAt updatedAt",
         populate: {
             path: "sender",
             select: userPreviewSelect // Сразу подтягиваем автора сообщения
