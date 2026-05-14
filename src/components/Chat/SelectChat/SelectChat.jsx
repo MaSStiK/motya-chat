@@ -22,8 +22,11 @@ export default function SelectChat() {
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                Content={AddChat}
-            />
+            >
+                {({ onClose }) => (
+                    <AddChat onClose={onClose} />
+                )}
+            </Modal>
         </>
     )
 }

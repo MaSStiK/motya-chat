@@ -31,8 +31,11 @@ export default function Searchbar() {
             <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                Content={AddChat}
-            />
+            >
+                {({ onClose }) => (
+                    <AddChat onClose={onClose} />
+                )}
+            </Modal>
         </>
     )
 }

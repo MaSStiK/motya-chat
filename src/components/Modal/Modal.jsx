@@ -4,7 +4,7 @@ import { createPortal } from "react-dom"
 
 import "./Modal.css"
 
-export default function Modal({ isOpen, onClose, Content }) {
+export default function Modal({ isOpen, onClose, children }) {
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
@@ -13,6 +13,8 @@ export default function Modal({ isOpen, onClose, Content }) {
 
     useEffect(() => {
         if (!isOpen) return
+
+        const previousOverflow = document.body.style.overflow
 
         const handleKeyDown = (event) => {
             if (event.key === "Escape") {
@@ -25,16 +27,20 @@ export default function Modal({ isOpen, onClose, Content }) {
 
         return () => {
             document.removeEventListener("keydown", handleKeyDown)
-            document.body.style.overflow = ""
+            document.body.style.overflow = previousOverflow
         }
     }, [isOpen, onClose])
 
     if (!mounted || !isOpen) return null
 
     return createPortal(
-        <div className="modal-wrapper" onClick={onClose} >
+        <div className="modal-wrapper" onClick={onClose}>
             <div className="modal" onClick={(event) => event.stopPropagation()}>
-                {Content && <Content onClose={onClose} />}
+                {/* Защита от падения, если случайно передать обычный JSX */}
+                {typeof children === "function"
+                    ? children({ onClose })
+                    : children
+                }
             </div>
         </div>,
         document.body
