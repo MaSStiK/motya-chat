@@ -55,8 +55,9 @@ export default function Button({
 
     const commonProps = { id, className: classes, style, title }
 
-    const Icon = loading ? Loader2  // Если loading - картинка загрузки
-        : (typeof icon === "object" ? icon : null) // Если в icon передаем иконку из "lucide-react" - отображаем его как компонент
+    const Icon = loading
+        ? Loader2  // Если loading - картинка загрузки
+        : (typeof icon === "function" || typeof icon === "object" ? icon : null) // Если в icon передаем иконку из "lucide-react" - отображаем его как компонент
     const src = typeof icon === "string" ? icon : null // Если в icon передаем ссылку на картинку - отображаем как Image src
     const content = (
         <>

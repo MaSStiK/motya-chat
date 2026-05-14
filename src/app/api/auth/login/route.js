@@ -38,6 +38,13 @@ export async function POST(req) {
         setAuthCookie(response, token)
         return response
     } catch (error) {
+        if (error.message === "GOOGLE_ACCOUNT") {
+            return NextResponse.json(
+                { message: "Данный email зарегистрирован через Google" },
+                { status: 400 }
+            )
+        }
+
         if (error.message === "INVALID_CREDENTIALS") {
             return NextResponse.json(
                 { message: "Неверный email или пароль" },

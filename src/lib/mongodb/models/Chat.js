@@ -7,6 +7,7 @@ const ChatSchema = new Schema({
         default: "private",
         required: true
     },
+
     members: {
         type: [
             {
@@ -16,23 +17,27 @@ const ChatSchema = new Schema({
             }
         ],
         validate: {
-            validator: members => members.length > 0,
+            validator: members => Array.isArray(members) && members.length > 0,
             message: "В чате должен быть хотя бы один участник"
         }
     },
+
     title: {
         type: String,
         trim: true,
         maxlength: 128,
         default: null
     },
+
     lastMessage: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Message",
         default: null
     },
+
     privateKey: {
         type: String,
+        trim: true,
         default: null
     }
 }, {

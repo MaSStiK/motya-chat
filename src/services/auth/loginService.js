@@ -19,6 +19,11 @@ export async function loginUser(data) {
         throw new Error("INVALID_CREDENTIALS")
     }
 
+    // Если аккаунт создан через Google OAuth - вход по паролю недоступен
+    if (user.provider === "google") {
+        throw new Error("GOOGLE_ACCOUNT")
+    }
+
     // Сравниваем пароль с хешем
     const isPasswordValid = await bcrypt.compare(password, user.password)
 
