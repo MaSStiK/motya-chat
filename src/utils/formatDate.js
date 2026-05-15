@@ -6,13 +6,14 @@ dayjs.locale("ru")
 /**
  * Форматирование времени сообщения
  *
- * Меньше 12 часов:
+ * Сегодня:
  * 12:30
  *
+ * Вчера ночью (< 12 часов):
+ * 23:15
+ *
  * Меньше недели:
- * пн
- * вт
- * ср
+ * пн / вт / ср
  *
  * Старше недели:
  * 11.05.2026
@@ -21,10 +22,15 @@ export function formatChatDate(date) {
     const now = dayjs()
     const messageDate = dayjs(date)
 
+    // Если сообщение отправлено сегодня
+    if (messageDate.isSame(now, "day")) {
+        return messageDate.format("HH:mm")
+    }
+
     // Разница в часах
     const diffHours = now.diff(messageDate, "hour")
 
-    // Меньше 12 часов
+    // Если прошло меньше 12 часов
     if (diffHours < 12) {
         return messageDate.format("HH:mm")
     }

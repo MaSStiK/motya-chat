@@ -85,7 +85,7 @@ export default function ChatList() {
                     />
 
                     {chat.lastMessage && (
-                        <div className="flex-col gap-1 chat-list__item-time">
+                        <div className="flex-col gap-1 chat-list__item-info">
                             <span className="fs-small text-brown">
                                 {formatChatDate(chat.lastMessage.createdAt)}
                             </span>
@@ -99,9 +99,7 @@ export default function ChatList() {
 }
 
 function ChatListStatus({ chat }) {
-    if (chat.unreadCount > 0) {
-        return <span className="fs-tiny text-white chat-list__badge">{chat.unreadCount}</span>
-    }
+    if (chat.unreadCount > 0) return <span className="fs-tiny text-white chat-list__badge">{chat.unreadCount}</span>
 
     if (!chat.lastMessage?.fromMe) return null
 

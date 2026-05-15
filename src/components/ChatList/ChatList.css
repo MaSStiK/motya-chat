@@ -18,7 +18,7 @@
 }
 
 /* Время справа от сообщения и статус прочтения */
-.chat-list__item-time {
+.chat-list__item-info {
     /* Одинаковый отступ что бы компенсировать разную ширину цифр */
     min-width: 50px;
     align-items: flex-end;
