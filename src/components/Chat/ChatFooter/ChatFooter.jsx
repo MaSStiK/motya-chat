@@ -1,5 +1,5 @@
-import AddAttachments from "../AddAttachments/AddAttachments"
-import SendMessage from "../SendMessage/SendMessage"
+import AddAttachments from "./AddAttachments"
+import SendMessage from "./SendMessage"
 
 import "./ChatFooter.css"
 

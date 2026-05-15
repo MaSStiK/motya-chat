@@ -6,8 +6,6 @@ import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
 import { Send } from "lucide-react"
 
-import "./SendMessage.css"
-
 export default function SendMessage() {
     const activeChat = useAtomValue(activeChatAtom)
     const setMessages = useSetAtom(messagesAtom)
@@ -41,11 +39,27 @@ export default function SendMessage() {
                 throw new Error(data.message || "Ошибка отправки")
             }
 
-            // Добавляем новое сообщение в список
-            setMessages((prev) => [
-                ...prev,
-                data.message
-            ])
+            // Добавляем новое сообщение в сообщения чата
+            setMessages((prev) => {
+                const currentChat = prev[activeChatId] || {
+                    items: [],
+                    loading: false,
+                    loaded: true
+                }
+
+                return {
+                    ...prev,
+
+                    [activeChatId]: {
+                        ...currentChat,
+
+                        items: [
+                            ...currentChat.items,
+                            data.message
+                        ]
+                    }
+                }
+            })
 
             // Обновляем последнее сообщение чата
             setChatList((prev) =>

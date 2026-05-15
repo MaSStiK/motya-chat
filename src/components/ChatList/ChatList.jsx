@@ -1,12 +1,9 @@
 "use client"
 import { useEffect, useState } from "react"
-import clsx from "clsx"
 import { useAtom } from "jotai"
-import { Check, CheckCheck } from "lucide-react"
 import { chatListAtom, activeChatAtom } from "@/atoms/store"
-import ChatListFeedback from "./ChatListFeedback/ChatListFeedback"
-import UserPreview from "@/components/UserPreview/UserPreview"
-import { formatChatDate } from "@/utils/formatDate"
+import ChatListFeedback from "./ChatListFeedback"
+import ChatListItem from "./ChatListItem"
 
 import "./ChatList.css"
 
@@ -73,48 +70,13 @@ export default function ChatList() {
     return (
         <div className="flex-col">
             {chatList.map((chat) => (
-                <button
+                <ChatListItem
                     key={chat.id}
-                    className={clsx(
-                        "flex-row chat-list__item",
-                        {
-                            "chat-list__item--active":
-                                activeChat?.id === chat.id
-                        }
-                    )}
+                    chat={chat}
+                    active={activeChat?.id === chat.id}
                     onClick={() => openChat(chat.id)}
-                >
-                    <UserPreview
-                        avatar={chat.title}
-                        name={chat.title}
-                        subtext={chat.lastMessage?.text || "Нет сообщений"}
-                    />
-
-                    {chat.lastMessage && (
-                        <div className="flex-col gap-1 chat-list__item-info">
-                            <span className="fs-small text-brown">
-                                {formatChatDate(chat.lastMessage.createdAt)}
-                            </span>
-                            <ChatListStatus chat={chat} />
-                        </div>
-                    )}
-                </button>
+                />
             ))}
         </div>
-    )
-}
-
-function ChatListStatus({ chat }) {
-    if (chat.unreadCount > 0) return <span className="fs-tiny text-white chat-list__badge">{chat.unreadCount}</span>
-
-    if (!chat.lastMessage?.fromMe) return null
-
-    return (
-        <span>
-            {chat.lastMessage.isRead
-                ? <CheckCheck size={14} color="var(--red-light)" />
-                : <Check size={14} color="var(--red-light)" />
-            }
-        </span>
     )
 }

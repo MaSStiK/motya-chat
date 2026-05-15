@@ -1,29 +1,46 @@
 "use client"
 import { useEffect, useRef } from "react"
-import clsx from "clsx"
 import { useAtom, useAtomValue } from "jotai"
 import { activeChatAtom, messagesAtom } from "@/atoms/store"
-import { formatMessageTime } from "@/utils/formatDate"
+import Message from "./Message"
 
 import "./MessageList.css"
 
 export default function MessageList() {
     const activeChat = useAtomValue(activeChatAtom)
-    const [messages, setMessages] = useAtom(messagesAtom)
+    const [messagesByChat, setMessagesByChat] = useAtom(messagesAtom)
 
     const bottomRef = useRef(null)
     const isFirstRender = useRef(true)
 
     const activeChatId = activeChat?.id
+    const chatMessagesState = messagesByChat[activeChatId] || {
+        items: [],
+        loading: false,
+        loaded: false
+    }
+
+    const messages = chatMessagesState.items
 
     // Получаем сообщения активного чата
     useEffect(() => {
-        if (!activeChatId) {
-            setMessages([])
-            return
-        }
+        if (!activeChatId) return
 
         async function fetchMessages() {
+            const cachedMessages = messagesByChat[activeChatId]?.items || []
+
+            // Если сообщений нет в кеше - показываем загрузку
+            if (!cachedMessages.length) {
+                setMessagesByChat((prev) => ({
+                    ...prev,
+                    [activeChatId]: {
+                        items: [],
+                        loaded: false,
+                        loading: true
+                    }
+                }))
+            }
+
             try {
                 const response = await fetch(`/api/chats/${activeChatId}/messages`)
                 const data = await response.json()
@@ -32,15 +49,30 @@ export default function MessageList() {
                     throw new Error(data.message || "Ошибка загрузки сообщений")
                 }
 
-                setMessages(data.messages)
+                setMessagesByChat((prev) => ({
+                    ...prev,
+                    [activeChatId]: {
+                        items: data.messages,
+                        loaded: true,
+                        loading: false
+                    }
+                }))
             } catch (error) {
                 console.error("Fetch messages error:", error)
-                setMessages([])
+
+                setMessagesByChat((prev) => ({
+                    ...prev,
+                    [activeChatId]: {
+                        items: cachedMessages,
+                        loaded: Boolean(cachedMessages.length),
+                        loading: false
+                    }
+                }))
             }
         }
 
         fetchMessages()
-    }, [activeChatId, setMessages])
+    }, [activeChatId])
 
     // Прокрутка чата вниз
     useEffect(() => {
@@ -53,6 +85,18 @@ export default function MessageList() {
         isFirstRender.current = false
     }, [messages])
 
+    if (!activeChatId) return null
+
+    // Загрузка сообщений
+    if (chatMessagesState.loading && !messages.length) {
+        return (
+            <div className="flex-col gap-3 message-list">
+                <p className="text-gray">Загрузка сообщений...</p>
+            </div>
+        )
+    }
+
+    // Отображаем сообщения
     return (
         <div className="flex-col gap-3 message-list">
             {messages.map((message) => (
@@ -61,24 +105,6 @@ export default function MessageList() {
 
             {/* Якорь внизу */}
             <div ref={bottomRef} />
-        </div>
-    )
-}
-
-function Message({ message }) {
-    const classes = clsx(
-        "message",
-        {
-            "message--from-me": message.fromMe
-        }
-    )
-
-    return (
-        <div className={classes}>
-            <p>{message.text}</p>
-            <div className="message__meta">
-                <span className="fs-tiny text-gray">{formatMessageTime(message.createdAt)}</span>
-            </div>
         </div>
     )
 }

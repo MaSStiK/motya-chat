@@ -3,3 +3,8 @@
     background-color: var(--bg-accent);
     align-items: center;
 }
+
+/* Поле отправки сообщений */
+.send-message {
+    flex: 1;
+}

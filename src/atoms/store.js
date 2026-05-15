@@ -100,4 +100,4 @@ export const activeChatAtom = atom(null)
  *     ...
  * ]
  */
-export const messagesAtom = atom([])
+export const messagesAtom = atom({})

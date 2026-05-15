@@ -1,16 +1,60 @@
+/* Отображения статуса загрузки или ошибки */
+.chat-list__feedback {
+    padding: var(--gap-8);
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Чат в списке чатов */
 .chat-list__item {
-    justify-content: space-between;
     padding: var(--gap-3);
-    text-align: left;
+    overflow: hidden;
+
+}
+
+/* Контент чата */
+/* Имя отправителя | Время */
+/* Последнее сообщение | Статус прочтения */
+.chat-list__item-content {
+    width: calc(100% - 60px);
+}
+
+.chat-list__item-content .flex-row {
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Время или дата отправки сообщения */
+.chat-list__item-time {
+    /* Одинаковый размер что бы компенсировать разную ширину цифр */
+    min-width: 40px;
+    flex-shrink: 0; /* Запретить сжатие */
+    text-align: right;
+}
+
+/* Кол-во непрочитанных сообщений */
+.chat-list__badge {
+    flex-shrink: 0; /* Запретить сжатие */
+    min-width: 18px;
+    height: 18px;
+    border-radius: 18px;
+    padding: 0 6px;
+    text-align: center;
+    background-color: #552424;
 }
 
 /* Подсвечиваем кнопки при наведении */
 @media (hover: hover) {
-    .chat-list__item:is(:hover, :focus-visible):not(.chat-list__item--active) { background-color: var(--bg-accent); }
+    .chat-list__item:is(:hover, :focus-visible):not(.chat-list__item--active) {
+        background-color: var(--bg-accent);
+    }
 }
 
 @media (hover: none) {
-    .chat-list__item:active:not(.chat-list__item--active) { background-color: var(--bg-accent); }
+    .chat-list__item:active:not(.chat-list__item--active) {
+        background-color: var(--bg-accent);
+    }
 }
 
 /* При активации чата меняем цвет фона */
@@ -18,26 +62,7 @@
     background-color: var(--red-dark);
 }
 
-/* Так же делаем текст ярче */
-.chat-list__item--active .user-preview__content span,
-.chat-list__item--active .chat-list__item-info span {
+/* Так же делаем текст ярче в сообщения и времени отправки */
+.chat-list__item--active :is(.chat-list__item-time, .chat-list__item-message) {
     color: var(--text-light);
-}
-
-/* Время справа от сообщения и статус прочтения */
-.chat-list__item-info {
-    /* Одинаковый отступ что бы компенсировать разную ширину цифр */
-    min-width: 50px;
-    align-items: flex-end;
-    text-align: right;
-}
-
-/* Кол-во непрочитанных сообщений */
-.chat-list__badge {
-    min-width: 18px;
-    height: 18px;
-    border-radius: 18px;
-    padding: 0 6px;
-    text-align: center;
-    background-color: #552424;
 }
