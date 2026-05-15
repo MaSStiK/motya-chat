@@ -19,49 +19,48 @@ export const userAtom = atom(null)
  * Chat list пример:
  * [
  *     {
- *         "id": "6a023c9b9ebb58e27b8dfac1",
+ *         "id": "6a062b65500538757105e282",
  *         "type": "private",
  *         "title": "User 2",
  *         "members": [
  *             {
- *                 "id": "69fe1acc2eacf69346d00e09",
+ *                 "id": "6a04f3acfad880b414fa0e7c",
  *                 "name": "User 1",
- *                 "username": "seven-volt-sierra",
- *                 "avatar": null
+ *                 "username": "super-seven-solar",
+ *                 "avatar": "link"
  *             },
  *             {
- *                 "id": "69fe350f509f44ecaaa344c7",
+ *                 "id": "6a05de2faeab594ef9395f59",
  *                 "name": "User 2",
- *                 "username": "mango-kiwi-astro",
- *                 "avatar": null
+ *                 "username": "neo-zen-sigma",
+ *                 "avatar": "link"
  *             }
  *         ],
  *         "companion": {
- *             "id": "69fe350f509f44ecaaa344c7",
+ *             "id": "6a05de2faeab594ef9395f59",
  *             "name": "User 2",
- *             "username": "mango-kiwi-astro",
- *             "avatar": null
+ *             "username": "neo-zen-sigma",
+ *             "avatar": "link"
  *         },
  *         "lastMessage": {
- *             "id": "6a03d404df58d413569a9b11",
- *             "chatId": "6a023c9b9ebb58e27b8dfac1",
+ *             "id": "6a0712530d1528d8f87fbb32",
+ *             "chatId": "6a062b65500538757105e282",
  *             "text": "text",
- *             "senderId": "69fe350f509f44ecaaa344c7",
+ *             "senderId": "6a04f3acfad880b414fa0e7c",
  *             "sender": {
- *                 "id": "69fe350f509f44ecaaa344c7",
- *                 "name": "User 2",
- *                 "username": "mango-kiwi-astro",
- *                 "avatar": null
+ *                 "id": "6a04f3acfad880b414fa0e7c",
+ *                 "name": "User 1",
+ *                 "username": "super-seven-solar",
+ *                 "avatar": "link"
  *             },
- *             "fromMe": false,
- *             "readBy": [
- *                 "69fe350f509f44ecaaa344c7"
- *             ],
- *             "createdAt": "2026-05-13T01:29:40.178Z",
- *             "updatedAt": "2026-05-13T01:29:40.178Z"
+ *             "fromMe": true,
+ *             "isRead": false,
+ *             "createdAt": "2026-05-15T12:32:19.535Z",
+ *             "updatedAt": "2026-05-15T12:32:19.535Z"
  *         },
- *         "createdAt": "2026-05-11T20:31:23.489Z",
- *         "updatedAt": "2026-05-13T01:29:40.205Z"
+ *         "createdAt": "2026-05-14T20:07:01.012Z",
+ *         "updatedAt": "2026-05-15T12:47:04.444Z",
+ *         "unreadCount": 0
  *     },
  *     ...
  * ]
@@ -76,28 +75,38 @@ export const chatListAtom = atom([])
 export const activeChatAtom = atom(null)
 
 /**
- * Массив сообщений из чата activeChatAtom
+ * Объект сообщений из чатов
  * Messages пример:
- * [
- *     {
- *         "id": "6a03d404df58d413569a9b11",
- *         "chatId": "6a023c9b9ebb58e27b8dfac1",
- *         "text": "text",
- *         "senderId": "69fe350f509f44ecaaa344c7",
-"           sender": {
- *             "id": "69fe350f509f44ecaaa344c7",
- *             "name": "User 2",
- *             "username": "mango-kiwi-astro",
- *             "avatar": null
- *         },
- *         "fromMe": true,
- *         "readBy": [
- *             "69fe1acc2eacf69346d00e09"
+ * {
+ *     "6a06feb10d1528d8f87fb6c1": {
+ *         "items": [
+ *             {
+ *                 "id": "6a06febb0d1528d8f87fb6da",
+ *                 "chatId": "6a06feb10d1528d8f87fb6c1",
+ *                 "text": "text",
+ *                 "senderId": "6a04f3acfad880b414fa0e7c",
+ *                 "sender": {
+ *                     "id": "6a04f3acfad880b414fa0e7c",
+ *                     "name": "User 1",
+ *                     "username": "super-seven-solar",
+ *                     "avatar": "link"
+ *                 },
+ *                 "fromMe": true,
+ *                 "isRead": true,
+ *                 "createdAt": "2026-04-15T11:08:43.422Z",
+ *                 "updatedAt": "2026-04-15T11:08:43.422Z"
+ *             },
+ *             ...
  *         ],
- *         "createdAt": "2026-05-13T01:29:40.178Z",
- *         "updatedAt": "2026-05-13T01:29:40.178Z"
+ *         "loaded": true,
+ *         "loading": false
+ *     },
+ *     "6a062b65500538757105e282": {
+ *         "items": [],
+ *         "loaded": false,
+ *         "loading": true
  *     },
  *     ...
- * ]
+ * }
  */
-export const messagesAtom = atom({})
+export const messagesByChatAtom = atom({})

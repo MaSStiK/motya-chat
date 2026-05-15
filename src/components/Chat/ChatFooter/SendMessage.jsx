@@ -1,14 +1,14 @@
 "use client"
 import { useState } from "react"
 import { useAtomValue, useSetAtom } from "jotai"
-import { chatListAtom, activeChatAtom, messagesAtom } from "@/atoms/store"
+import { chatListAtom, activeChatAtom, messagesByChatAtom } from "@/atoms/store"
 import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
 import { Send } from "lucide-react"
 
 export default function SendMessage() {
     const activeChat = useAtomValue(activeChatAtom)
-    const setMessages = useSetAtom(messagesAtom)
+    const setMessagesByChat = useSetAtom(messagesByChatAtom)
     const setChatList = useSetAtom(chatListAtom)
 
     const [message, setMessage] = useState("")
@@ -40,7 +40,7 @@ export default function SendMessage() {
             }
 
             // Добавляем новое сообщение в сообщения чата
-            setMessages((prev) => {
+            setMessagesByChat((prev) => {
                 const currentChat = prev[activeChatId] || {
                     items: [],
                     loading: false,

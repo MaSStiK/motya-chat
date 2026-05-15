@@ -3,14 +3,14 @@ import {
     userAtom,
     chatListAtom,
     activeChatAtom,
-    messagesAtom
+    messagesByChatAtom
 } from "@/atoms/store"
 
 export default function useResetAppState() {
     const setUser = useSetAtom(userAtom)
     const setChatList = useSetAtom(chatListAtom)
     const setActiveChat = useSetAtom(activeChatAtom)
-    const setMessages = useSetAtom(messagesAtom)
+    const setMessages = useSetAtom(messagesByChatAtom)
 
     return function resetAppState() {
         setUser(null)

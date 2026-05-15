@@ -1,14 +1,14 @@
 "use client"
 import { useEffect, useRef } from "react"
 import { useAtom, useAtomValue } from "jotai"
-import { activeChatAtom, messagesAtom } from "@/atoms/store"
+import { activeChatAtom, messagesByChatAtom } from "@/atoms/store"
 import Message from "./Message"
 
 import "./MessageList.css"
 
 export default function MessageList() {
     const activeChat = useAtomValue(activeChatAtom)
-    const [messagesByChat, setMessagesByChat] = useAtom(messagesAtom)
+    const [messagesByChat, setMessagesByChat] = useAtom(messagesByChatAtom)
 
     const bottomRef = useRef(null)
     const isFirstRender = useRef(true)
