@@ -1,7 +1,7 @@
 "use client"
-
 import { useEffect, useState } from "react"
-import { useAtom, useSetAtom } from "jotai"
+import clsx from "clsx"
+import { useAtom } from "jotai"
 import { Check, CheckCheck } from "lucide-react"
 import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import ChatListFeedback from "./ChatListFeedback/ChatListFeedback"
@@ -12,7 +12,7 @@ import "./ChatList.css"
 
 export default function ChatList() {
     const [chatList, setChatList] = useAtom(chatListAtom)
-    const setActiveChat = useSetAtom(activeChatAtom)
+    const [activeChat, setActiveChat] = useAtom(activeChatAtom)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
 
@@ -75,7 +75,13 @@ export default function ChatList() {
             {chatList.map((chat) => (
                 <button
                     key={chat.id}
-                    className="flex-row chat-list__item"
+                    className={clsx(
+                        "flex-row chat-list__item",
+                        {
+                            "chat-list__item--active":
+                                activeChat?.id === chat.id
+                        }
+                    )}
                     onClick={() => openChat(chat.id)}
                 >
                     <UserPreview
@@ -106,8 +112,8 @@ function ChatListStatus({ chat }) {
     return (
         <span>
             {chat.lastMessage.isRead
-                ? <CheckCheck size={14} color="var(--gray-light)" />
-                : <Check size={14} color="var(--gray-light)" />
+                ? <CheckCheck size={14} color="var(--red-light)" />
+                : <Check size={14} color="var(--red-light)" />
             }
         </span>
     )

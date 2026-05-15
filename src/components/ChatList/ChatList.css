@@ -6,15 +6,22 @@
 
 /* Подсвечиваем кнопки при наведении */
 @media (hover: hover) {
-    .chat-list__item:is(:hover, :focus-visible) { background-color: var(--bg-accent); }
+    .chat-list__item:is(:hover, :focus-visible):not(.chat-list__item--active) { background-color: var(--bg-accent); }
 }
 
 @media (hover: none) {
-    .chat-list__item:active { background-color: var(--bg-accent); }
+    .chat-list__item:active:not(.chat-list__item--active) { background-color: var(--bg-accent); }
 }
 
-.chat-list__item.active {
+/* При активации чата меняем цвет фона */
+.chat-list__item--active {
     background-color: var(--red-dark);
+}
+
+/* Так же делаем текст ярче */
+.chat-list__item--active .user-preview__content span,
+.chat-list__item--active .chat-list__item-info span {
+    color: var(--text-light);
 }
 
 /* Время справа от сообщения и статус прочтения */
