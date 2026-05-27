@@ -2,7 +2,13 @@
 import { useEffect, useRef } from "react"
 
 const DRAG_THRESHOLD = 5
+const SCROLL_OFFSET = 160
+const MIN_SCROLL_SPEED = 30
+const MAX_SCROLL_SPEED = 90
 
+// Выделение сообщений через зажатие мыши
+// При наведении курсора на верх или низ контейнера - контейнер автоматически прокручивается
+// Повторное выделение сообщения снимает выделение
 export default function MessageSelection({
     containerRef,
     setSelectedMessageIds
@@ -19,21 +25,20 @@ export default function MessageSelection({
     const initialSelectedIds = useRef([])
     const toggledMessageIds = useRef(new Set())
 
-    const minScrollSpeed = 30
-    const maxScrollSpeed = 90
-
     useEffect(() => {
         const container = containerRef.current
         if (!container) return
 
+        // Получаем Y позицию внутри scroll контейнера
         function getContentY(clientY) {
             const rect = container.getBoundingClientRect()
 
             return clientY - rect.top + container.scrollTop
         }
 
+        // Переключаем выбор сообщений
         function toggleMessageIds(messageIds) {
-            setSelectedMessageIds((prev) => {
+            setSelectedMessageIds(() => {
                 const next = new Set(initialSelectedIds.current)
 
                 messageIds.forEach((id) => {
@@ -48,6 +53,7 @@ export default function MessageSelection({
             })
         }
 
+        // Получаем сообщения внутри области выделения
         function getTouchedMessageIds() {
             const minY = Math.min(startY.current, currentY.current)
             const maxY = Math.max(startY.current, currentY.current)
@@ -60,19 +66,15 @@ export default function MessageSelection({
                 .filter((message) => {
                     const rect = message.getBoundingClientRect()
                     const containerRect = container.getBoundingClientRect()
-
-                    const messageTop =
-                        rect.top - containerRect.top + container.scrollTop
-
-                    const messageBottom =
-                        rect.bottom - containerRect.top + container.scrollTop
-
+                    const messageTop = rect.top - containerRect.top + container.scrollTop
+                    const messageBottom = rect.bottom - containerRect.top + container.scrollTop
                     return messageBottom >= minY && messageTop <= maxY
                 })
                 .map((message) => message.dataset.messageId)
                 .filter(Boolean)
         }
 
+        // Обновляем выделенные сообщения
         function updateSelectedMessages() {
             const touchedIds = getTouchedMessageIds()
 
@@ -83,20 +85,22 @@ export default function MessageSelection({
             toggleMessageIds([...toggledMessageIds.current])
         }
 
+        // Начинаем выделение сообщений
         function startSelecting() {
             isSelecting.current = true
             container.classList.add("message-list--selecting")
 
             updateSelectedMessages()
 
-            animationFrame.current =
-                requestAnimationFrame(autoScroll)
+            animationFrame.current = requestAnimationFrame(autoScroll)
         }
 
+        // Ограничиваем значение диапазоном
         function clamp(value, min, max) {
             return Math.min(Math.max(value, min), max)
         }
 
+        // Безопасно изменяем scrollTop
         function setScrollTop(value) {
             const maxScrollTop = Math.max(
                 container.scrollHeight - container.clientHeight,
@@ -106,58 +110,44 @@ export default function MessageSelection({
             container.scrollTop = clamp(value, 0, maxScrollTop)
         }
 
-        function getScrollSpeed(distanceToEdge, offset) {
-            const progress =
-                1 - Math.min(distanceToEdge / offset, 1)
+        // Вычисляем скорость авто прокрутки
+        function getScrollSpeed(distanceToEdge) {
+            const progress = 1 - Math.min(distanceToEdge / SCROLL_OFFSET, 1)
 
-            return minScrollSpeed +
-                (maxScrollSpeed - minScrollSpeed) *
+            return MIN_SCROLL_SPEED +
+                (MAX_SCROLL_SPEED - MIN_SCROLL_SPEED) *
                 Math.pow(progress, 2.5)
         }
 
+        // Авто прокрутка контейнера при наведении сверху или снизу при зажатой мыши
         function autoScroll() {
             if (!isSelecting.current) return
 
             const rect = container.getBoundingClientRect()
-            const offset = 160
 
-            // Верхняя зона
-            const distanceToTop =
-                lastClientY.current - rect.top
-
-            if (distanceToTop < offset) {
-                const speed = getScrollSpeed(
-                    distanceToTop,
-                    offset
+            const distanceToTop = lastClientY.current - rect.top
+            if (distanceToTop < SCROLL_OFFSET) {
+                setScrollTop(
+                    container.scrollTop - getScrollSpeed(distanceToTop)
                 )
-
-                setScrollTop(container.scrollTop - speed)
             }
 
-            // Нижняя зона
-            const distanceToBottom =
-                rect.bottom - lastClientY.current
-
-            if (distanceToBottom < offset) {
-                const speed = getScrollSpeed(
-                    distanceToBottom,
-                    offset
+            const distanceToBottom = rect.bottom - lastClientY.current
+            if (distanceToBottom < SCROLL_OFFSET) {
+                setScrollTop(
+                    container.scrollTop + getScrollSpeed(distanceToBottom)
                 )
-
-                setScrollTop(container.scrollTop + speed)
             }
 
-            currentY.current =
-                getContentY(lastClientY.current)
-
+            currentY.current = getContentY(lastClientY.current)
             updateSelectedMessages()
-
-            animationFrame.current =
-                requestAnimationFrame(autoScroll)
+            animationFrame.current = requestAnimationFrame(autoScroll)
         }
 
+        // Нажатие кнопки мыши
         function handlePointerDown(e) {
-            const message = e.target.closest(".message")
+            // Если нажали на сообщение - даём выделять текст внутри сообщения
+            if (e.target.closest(".message")) return
 
             isPointerDown.current = true
             isSelecting.current = false
@@ -171,17 +161,6 @@ export default function MessageSelection({
 
             setSelectedMessageIds((prev) => {
                 initialSelectedIds.current = prev
-
-                if (message?.dataset.messageId) {
-                    toggledMessageIds.current.add(
-                        message.dataset.messageId
-                    )
-
-                    toggleMessageIds([
-                        message.dataset.messageId
-                    ])
-                }
-
                 return prev
             })
 
@@ -189,14 +168,14 @@ export default function MessageSelection({
             window.addEventListener("pointerup", handlePointerUp)
         }
 
+        // Движение мышки
         function handlePointerMove(e) {
             if (!isPointerDown.current) return
 
             lastClientY.current = e.clientY
             currentY.current = getContentY(e.clientY)
 
-            const diff =
-                Math.abs(e.clientY - startClientY.current)
+            const diff = Math.abs(e.clientY - startClientY.current)
 
             if (!isSelecting.current && diff < DRAG_THRESHOLD) {
                 return
@@ -206,12 +185,14 @@ export default function MessageSelection({
                 startSelecting()
             }
 
+            // Во время выделения не даём браузеру выделять текст
             e.preventDefault()
             e.stopPropagation()
 
             updateSelectedMessages()
         }
 
+        // Отпускание кнопки мыши
         function handlePointerUp() {
             isPointerDown.current = false
             isSelecting.current = false
