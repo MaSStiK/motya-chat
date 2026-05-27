@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { useDebounceAsync } from "@/lib/hooks/useDebounceAsync"
+import { useDebounceAsync } from "@/hooks/useDebounceAsync"
 import { useSetAtom } from "jotai"
 import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import Button from "@/components/UI/Button/Button"
@@ -123,7 +123,7 @@ export default function AddChat({ onClose }) {
                         width100
                         big
                     />
-                    {(user && !searchError) && <span className="fs-small text-green">Пользователь: {user.name}</span>}
+                    {(user && !searchError) && <span className="fs-small">Пользователь: {user.name}</span>}
                 </div>
 
                 <div className="flex-row gap-5">
@@ -140,7 +140,7 @@ export default function AddChat({ onClose }) {
                     <Button
                         text="Создать"
                         title="Создать"
-                        className="red"
+                        className="accent"
                         type="button"
                         disabled={!user || searchLoading || createLoading}
                         loading={createLoading}

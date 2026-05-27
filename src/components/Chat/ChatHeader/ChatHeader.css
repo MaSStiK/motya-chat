@@ -1,6 +1,30 @@
 .chat-header {
-    height: 81px;
+    position: relative;
+    z-index: 10;
+}
+
+.chat-header__main,
+.chat-header__actions {
     padding: var(--gap-4);
     background-color: var(--bg-accent);
     border-bottom: 1px solid var(--border-accent);
+    z-index: 11;
+}
+
+/* Кнопки действий с сообщениями */
+.chat-header__actions {
+    width: 100%;
+    position: absolute;
+    top: 100%; left: 0;
+    padding: var(--gap-3) var(--gap-4);
+    justify-content: space-between;
+}
+
+.chat-header__actions.hidden {
+    display: none;
+}
+
+/* Кнопка Отмены */
+.chat-header__actions-cancel {
+    color: var(--text-accent);
 }

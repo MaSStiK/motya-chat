@@ -14,8 +14,8 @@
     --fw-regular:   400;
 
     /* Цвет текста */
-    --text-white:  var(--white);
-    --text-light:  var(--light);
+    --text-white:  var(--white); /* Для разных заголовков или коротких текстов */
+    --text-light:  var(--light); /* Для длинного текста (сообщения) */
     --text-gray:   var(--gray-light);
     --text-brown:  var(--brown);
     --text-accent: var(--red-light);

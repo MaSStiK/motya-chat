@@ -121,7 +121,7 @@ export default function Registration({ setForm }) {
                 {formError && <span className="form-error">{formError }</span>}
                 <Button
                     text={loading ? "Загрузка..." : "Зарегистрироваться"}
-                    className="red"
+                    className="accent"
                     type="submit"
                     loading={loading}
                     width100

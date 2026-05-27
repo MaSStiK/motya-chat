@@ -6,12 +6,6 @@
     scrollbar-gutter: stable;
 }
 
-@supports not (-webkit-touch-callout: none) {
-    .message-list {
-        overflow-y: overlay;
-    }
-}
-
 .message {
     /* Цвета фона сообщения если не fromMe */
     --bg-message: #280B0B;
@@ -20,6 +14,7 @@
     padding: var(--gap-3);
     border-radius: 16px 16px 16px 4px;
     background-color: var(--bg-message);
+    position: relative;
 }
 
 /* Если сообщение fromMe */
@@ -27,7 +22,39 @@
     background-color: var(--red-dark);
 }
 
+.message.message--selected {
+    background-color: #841219;
+}
+
+.message__selected {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
 /* Время отправки сообщения */
 .message__meta {
     text-align: right;
+}
+
+.message-list--selecting {
+    user-select: none;
+}
+
+.message-list--selecting * {
+    user-select: none;
+}
+
+.message p {
+    user-select: text;
+}
+
+.message-list {
+    overscroll-behavior: contain;
+}
+
+.message-selection {
+    display: contents;
 }

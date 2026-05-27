@@ -15,7 +15,7 @@ export default function SelectChat() {
                 <div className="select-chat__image">
                     <Send size={64} color="var(--red-light)" />
                 </div>
-                <h2 className="text-light">Выберите чат</h2>
+                <h2>Выберите чат</h2>
                 <span className="text-gray">Выберите чат из списка или создайте новый</span>
             </button>
             

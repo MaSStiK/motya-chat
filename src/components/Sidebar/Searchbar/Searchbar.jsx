@@ -23,7 +23,6 @@ export default function Searchbar() {
                 <Button
                     icon={Plus}
                     title="Создать чат"
-                    className="red"
                     onClick={() => setIsModalOpen(true)}
                 />
             </div>

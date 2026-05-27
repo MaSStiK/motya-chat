@@ -106,7 +106,7 @@ export default function SendMessage() {
             <Button
                 icon={Send}
                 title="Отправить сообщение"
-                className="red"
+                className="accent"
                 round
                 onClick={sendMessage}
                 disabled={!message.trim() || !activeChatId || loading}

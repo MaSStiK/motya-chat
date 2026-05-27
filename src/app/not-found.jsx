@@ -16,7 +16,7 @@ export default function NotFound() {
             <p className="text-center fs-xlarge fw-bold">Упс...<br/>Мы не нашли такую страницу</p>
             <Button
                 icon={Home}
-                text={"На главную"}
+                text="На главную"
                 href="/"
                 width100
             />

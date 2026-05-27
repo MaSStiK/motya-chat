@@ -4,13 +4,21 @@ import SelectChat from "./SelectChat/SelectChat"
 import ChatHeader from "./ChatHeader/ChatHeader"
 import MessageList from "./MessageList/MessageList"
 import ChatFooter from "./ChatFooter/ChatFooter"
-import { useAtom } from "jotai"
-import { activeChatAtom } from "@/atoms/store"
+import { useAtom, useSetAtom } from "jotai"
+import { activeChatAtom, selectedMessageIdsAtom } from "@/atoms/store"
 
 import "./Chat.css"
 
 export default function Chat() {
     const [activeChat, setActiveChat] = useAtom(activeChatAtom)
+    const setSelectedMessageIds = useSetAtom(selectedMessageIdsAtom)
+
+    const activeChatId = activeChat?.id
+
+    // Сбрасываем выделение при смене чата
+    useEffect(() => {
+        setSelectedMessageIds([])
+    }, [activeChatId])
     
     // Закрытие чата при нажатии ESC
     useEffect(() => {
@@ -24,6 +32,7 @@ export default function Chat() {
 
             if (e.key === "Escape") {
                 setActiveChat(null)
+                setSelectedMessageIds([])
             }
         }
 

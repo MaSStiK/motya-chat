@@ -105,7 +105,7 @@ export default function Login({ setForm }) {
                 {formError && <span className="form-error">{formError }</span>}
                 <Button
                     text={loading ? "Загрузка..." : "Войти"}
-                    className="red"
+                    className="accent"
                     type="submit"
                     loading={loading}
                     width100

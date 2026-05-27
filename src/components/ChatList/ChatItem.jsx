@@ -3,7 +3,7 @@ import UserPreview from "@/components/UserPreview/UserPreview"
 import ChatListStatus from "./ChatListStatus"
 import { formatChatDate } from "@/utils/formatDate"
 
-export default function ChatListItem({ chat, active, onClick }) {
+export default function ChatItem({ chat, active, onClick }) {
     return (
         <button
             className={clsx(

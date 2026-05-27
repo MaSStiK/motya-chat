@@ -2,6 +2,7 @@
     width: fit-content; /* Ширина кнопки зависит от контента и обтягивает его*/
     min-width: var(--button-height); 
     gap: var(--gap-1);
+    padding: var(--gap-2);
 }
 
 /* Иконка в кнопке чуть меньше кнопки */
@@ -14,8 +15,8 @@
 
 /* Большая кнопка */
 .button.ui-button.button--big {
-    width: var(--button-height-big);
-    height: var(--button-height-big);
+    min-width: var(--button-height-big);
+    min-height: var(--button-height-big);
 }
 
 /* Круглая кнопка */

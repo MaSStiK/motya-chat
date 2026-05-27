@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useAtom } from "jotai"
 import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import ChatListFeedback from "./ChatListFeedback"
-import ChatListItem from "./ChatListItem"
+import ChatItem from "./ChatItem"
 
 import "./ChatList.css"
 
@@ -12,9 +12,6 @@ export default function ChatList() {
     const [activeChat, setActiveChat] = useAtom(activeChatAtom)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
-
-    console.log(JSON.stringify(chatList, null, 4));
-
 
     useEffect(() => {
         const fetchChats = async () => {
@@ -73,7 +70,7 @@ export default function ChatList() {
     return (
         <div className="flex-col">
             {chatList.map((chat) => (
-                <ChatListItem
+                <ChatItem
                     key={chat.id}
                     chat={chat}
                     active={activeChat?.id === chat.id}

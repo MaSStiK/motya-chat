@@ -110,3 +110,15 @@ export const activeChatAtom = atom(null)
  * }
  */
 export const messagesByChatAtom = atom({})
+
+/**
+ * Ids выбранных сообщений
+ * [] - если ничего не выбрано
+ */
+export const selectedMessageIdsAtom = atom([])
+
+/**
+ * Id изменяемого сообщения
+ * null - если сообщение не выбрано
+ */
+export const editingMessageIdAtom = atom(null)
