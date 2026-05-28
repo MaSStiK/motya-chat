@@ -1,27 +1,51 @@
+/* Header чата */
 .chat-header {
+    width: 100%;
+    height: 81px;
+    border-bottom: 1px solid var(--border-accent);
+
     position: relative;
+    overflow: hidden;
     z-index: 10;
 }
 
 .chat-header__main,
 .chat-header__actions {
+    width: 100%;
+    height: 100%;
     padding: var(--gap-4);
     background-color: var(--bg-accent);
-    border-bottom: 1px solid var(--border-accent);
-    z-index: 11;
+    transition:
+        transform 0.2s ease;
 }
 
-/* Кнопки действий с сообщениями */
+/* Основной header */
+.chat-header__main {
+    transform: translateY(0);
+}
+
+/* Кнопки действий */
 .chat-header__actions {
-    width: 100%;
     position: absolute;
-    top: 100%; left: 0;
-    padding: var(--gap-3) var(--gap-4);
+    top: 0;
+    left: 0;
+
     justify-content: space-between;
+    align-items: center;
+
+    pointer-events: none;
+    transform: translateY(100%);
 }
 
-.chat-header__actions.hidden {
-    display: none;
+/* При выделении сообщений скрываем основной header */
+.chat-header--actions .chat-header__main {
+    transform: translateY(-100%);
+}
+
+/* Показываем actions */
+.chat-header--actions .chat-header__actions {
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 /* Кнопка Отмены */

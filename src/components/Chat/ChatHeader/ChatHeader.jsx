@@ -19,16 +19,20 @@ export default function ChatHeader() {
 
     // Отображаем действия с сообщениями если хотя бы одно сообщение выделено
     const selectedMessageIds = useAtomValue(selectedMessageIdsAtom)
-    const actionsClassName = clsx("flex-row gap-3 chat-header__actions", {
-        hidden: !selectedMessageIds.length > 0
-    })
+    const headerClassName = clsx(
+        "flex-col chat-header",
+        {
+            "chat-header--actions": selectedMessageIds.length > 0
+        }
+    )
 
+    // Хуки для функций кнопок
     const clearSelectedMessages = useClearSelectedMessages()
     const deleteSelectedMessages = useDeleteSelectedMessages()
     const editSelectedMessage = useEditSelectedMessage()
 
     return (
-        <div className="flex-col chat-header">
+        <div className={headerClassName}>
             <div className="chat-header__main">
                 <UserPreview
                     avatar={activeChat.title}
@@ -38,7 +42,7 @@ export default function ChatHeader() {
                 />
             </div>
 
-            <div className={actionsClassName}>
+            <div className="flex-row gap-3 chat-header__actions">
                 <div className="flex-row gap-3">
                     <Button
                         icon={Pencil}

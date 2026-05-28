@@ -1,11 +1,12 @@
+/* Контейнер с сообщениями растягиваем на всю доступную область */
 .message-list {
-    /* Растягиваем максимально по высоте */
     flex: 1;
     padding: var(--gap-2);
     overflow-y: auto;
     scrollbar-gutter: stable;
     overscroll-behavior: contain;
 }
+
 
 .message {
     /* Цвета фона сообщения */
@@ -18,16 +19,12 @@
     border-radius: 16px 16px 16px 4px;
     background-color: var(--bg-message);
     position: relative;
+    user-select: text;
 }
 
 /* Если сообщение fromMe */
 .message.message--from-me {
     background-color: var(--bg-message-from-me);
-}
-
-/* Выделение текста внутри сообщения */
-.message p {
-    user-select: text;
 }
 
 /* Время отправки сообщения и статус прочтения */
@@ -58,8 +55,4 @@
     position: absolute;
     top: -5px;
     right: -5px;
-}
-
-.message-list--with-actions {
-    padding-top: 48px;
 }
