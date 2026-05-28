@@ -6,7 +6,7 @@ import "./ChatFooter.css"
 export default function ChatFooter() {
     return (
         <div className="flex-row gap-3 chat-footer">
-            <AddAttachments />
+            {/* TODO: <AddAttachments /> */}
             <SendMessage />
         </div>
     )
