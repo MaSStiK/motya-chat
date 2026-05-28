@@ -4,20 +4,22 @@ import SelectChat from "./SelectChat/SelectChat"
 import ChatHeader from "./ChatHeader/ChatHeader"
 import MessageList from "./MessageList/MessageList"
 import ChatFooter from "./ChatFooter/ChatFooter"
-import { useAtom, useSetAtom } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 import { activeChatAtom, selectedMessageIdsAtom } from "@/atoms/store"
+import { useClearSelectedMessages } from "@/hooks/useMessageActions"
 
 import "./Chat.css"
 
 export default function Chat() {
     const [activeChat, setActiveChat] = useAtom(activeChatAtom)
-    const setSelectedMessageIds = useSetAtom(selectedMessageIdsAtom)
-
     const activeChatId = activeChat?.id
 
-    // Сбрасываем выделение при смене чата
+    const selectedMessageIds = useAtomValue(selectedMessageIdsAtom)
+    const clearSelectedMessages = useClearSelectedMessages()
+
+    // Сбрасываем выделенные сообщения при смене чата
     useEffect(() => {
-        setSelectedMessageIds([])
+        clearSelectedMessages()
     }, [activeChatId])
     
     // Закрытие чата при нажатии ESC
@@ -31,8 +33,13 @@ export default function Chat() {
             if (tag === "INPUT" || tag === "TEXTAREA") return
 
             if (e.key === "Escape") {
+                // Если есть выделенные сообщения - снимаем выделение, но не закрываем чат
+                if (selectedMessageIds.length > 0) {
+                    clearSelectedMessages()
+                    return
+                }
+
                 setActiveChat(null)
-                setSelectedMessageIds([])
             }
         }
 
@@ -41,7 +48,7 @@ export default function Chat() {
         return () => {
             window.removeEventListener("keydown", handleKeyDown)
         }
-    }, [activeChat])
+    }, [activeChat, selectedMessageIds.length])
 
     if (!activeChat) {
         return <SelectChat />

@@ -4,11 +4,14 @@
     padding: var(--gap-2);
     overflow-y: auto;
     scrollbar-gutter: stable;
+    overscroll-behavior: contain;
 }
 
 .message {
-    /* Цвета фона сообщения если не fromMe */
-    --bg-message: #280B0B;
+    /* Цвета фона сообщения */
+    --bg-message:        #280B0B;
+    --bg-message-from-me: var(--red-dark);
+
     width: fit-content;
     max-width: 430px;
     padding: var(--gap-3);
@@ -19,26 +22,22 @@
 
 /* Если сообщение fromMe */
 .message.message--from-me {
-    background-color: var(--red-dark);
+    background-color: var(--bg-message-from-me);
 }
 
-.message.message--selected {
-    background-color: #841219;
+/* Выделение текста внутри сообщения */
+.message p {
+    user-select: text;
 }
 
-.message__selected {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: -5px;
-    right: -5px;
-}
-
-/* Время отправки сообщения */
+/* Время отправки сообщения и статус прочтения */
 .message__meta {
-    text-align: right;
+    justify-content: flex-end;
+    align-items: center;
 }
 
+
+/* Выделение сообщений */
 .message-list--selecting {
     user-select: none;
 }
@@ -47,14 +46,20 @@
     user-select: none;
 }
 
-.message p {
-    user-select: text;
+/* Если сообщение выделено */
+.message.message--selected {
+    background-color: #841219;
 }
 
-.message-list {
-    overscroll-behavior: contain;
+/* Значок выделенного сообщения */
+.message__selected {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
 }
 
-.message-selection {
-    display: contents;
+.message-list--with-actions {
+    padding-top: 48px;
 }

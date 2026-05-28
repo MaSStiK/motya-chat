@@ -1,8 +1,7 @@
 "use client"
 import clsx from "clsx"
 import { formatMessageTime } from "@/utils/formatDate"
-
-import { BadgeCheck } from "lucide-react"
+import { BadgeCheck, Check, CheckCheck } from "lucide-react"
 
 export default function MessageItem({ message, selected }) {
     const classes = clsx(
@@ -22,10 +21,16 @@ export default function MessageItem({ message, selected }) {
                     <BadgeCheck size={20} />
                 </div>
             }
-            
 
-            <div className="message__meta">
-                <span className="fs-tiny text-gray">{formatMessageTime(message.createdAt)}</span>
+            <div className="flex-row gap-2 message__meta">
+                <span className="fs-tiny text-gray">
+                    {formatMessageTime(message.createdAt)}
+                </span>
+
+                {message.isRead
+                    ? <CheckCheck size={14} color="var(--red-light)" />
+                    : <Check size={14} color="var(--red-light)" />
+                }
             </div>
         </div>
     )
