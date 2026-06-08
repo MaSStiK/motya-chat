@@ -122,3 +122,11 @@ export const selectedMessageIdsAtom = atom([])
  * null - если сообщение не выбрано
  */
 export const editingMessageIdAtom = atom(null)
+
+/**
+ * Объект с черновиками (незаконченными сообщениями) пользователей
+ * {
+ *     [chatId]: "Текст черновика"
+ * }
+ */
+export const messageDraftsAtom = atom({})

@@ -24,7 +24,7 @@ export default function Chat() {
     
     // Закрытие чата при нажатии ESC
     useEffect(() => {
-        if (!activeChat) return // Чат закрыт
+        if (!activeChat) return
 
         const handleKeyDown = (e) => {
             const tag = e.target.tagName
