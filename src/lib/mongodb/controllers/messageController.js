@@ -19,6 +19,19 @@ export async function findLastMessagesByChatId(chatId, limit = 50) {
         .lean()
 }
 
+export async function findLastMessageByChatId(chatId) {
+    return Message.findOne({ chat: chatId })
+        .sort({ createdAt: -1 })
+        .lean()
+}
+
+export async function deleteMessagesByIds(chatId, messageIds) {
+    return Message.deleteMany({
+        chat: chatId,
+        _id: { $in: messageIds }
+    })
+}
+
 export async function countUnreadMessages(chatId, userId, lastReadAt) {
     return Message.countDocuments({
         chat: chatId,

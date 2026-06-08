@@ -8,6 +8,8 @@ import {
     createMessage,
     findMessageById,
     findLastMessagesByChatId,
+    findLastMessageByChatId,
+    deleteMessagesByIds
 } from "@/lib/mongodb/controllers/messageController"
 import { formatMessage } from "@/lib/serialization/message"
 
@@ -23,10 +25,7 @@ export async function getChatMessages({ chatId, userId }) {
 
     // Проверяем чат
     const chat = await findChatById(chatId, true)
-
-    if (!chat) {
-        throw new Error("CHAT_NOT_FOUND")
-    }
+    if (!chat) { throw new Error("CHAT_NOT_FOUND") }
 
     // Проверяем, что пользователь участник чата
     if (!isChatMember(chat, userId)) {
@@ -55,10 +54,7 @@ export async function sendMessage({ chatId, text, senderId }) {
 
     // Проверяем чат
     const chat = await findChatById(chatId, true)
-
-    if (!chat) {
-        throw new Error("CHAT_NOT_FOUND")
-    }
+    if (!chat) { throw new Error("CHAT_NOT_FOUND") }
 
     // Проверяем, что пользователь участник чата
     if (!isChatMember(chat, senderId)) {
@@ -73,7 +69,11 @@ export async function sendMessage({ chatId, text, senderId }) {
     })
 
     // Обновляем чат
-    await updateChatLastMessage(chatId, message._id)
+    await updateChatLastMessage(
+        chatId,
+        message._id,
+        message.createdAt
+    )
 
     // Получаем сообщение с populate
     const populatedMessage = await findMessageById(message._id)
@@ -83,4 +83,41 @@ export async function sendMessage({ chatId, text, senderId }) {
         populatedMessage,
         senderId
     )
+}
+
+export async function deleteMessages({ chatId, messageIds, userId }) {
+    // Подключаемся к MongoDB
+    await MongoConnect()
+
+    // Проверяем чат
+    const chat = await findChatById(chatId)
+    if (!chat) { throw new Error("CHAT_NOT_FOUND") }
+
+    const hasAccess = chat.members.some((member) => {
+        return member._id.toString() === userId
+    })
+
+    if (!hasAccess) {
+        throw new Error("CHAT_ACCESS_DENIED")
+    }
+
+    // Удаляем одно или несколько сообщений
+    const result = await deleteMessagesByIds(chatId, messageIds)
+
+    if (!result.deletedCount) {
+        throw new Error("MESSAGES_NOT_FOUND")
+    }
+
+    // Находим последнее доступное сообщение после удаления
+    const lastMessage = await findLastMessageByChatId(chatId)
+
+    // Обновляем последнее сообщение в чате
+    await updateChatLastMessage(
+        chatId,
+        lastMessage?._id || null,
+        // Устанавливаем время обновления либо предыдущее сообщение, либо время создания чата если сообщений нету
+        lastMessage?.createdAt || chat.createdAt
+    )
+
+    return result
 }

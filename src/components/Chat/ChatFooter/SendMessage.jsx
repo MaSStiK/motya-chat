@@ -2,6 +2,8 @@
 import { useState } from "react"
 import { useAtomValue, useSetAtom } from "jotai"
 import { chatListAtom, activeChatAtom, messagesByChatAtom } from "@/atoms/store"
+import { addMessageToChat } from "@/utils/messageUtils"
+import { moveChatToTop } from "@/utils/chatUtils"
 import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
 import { Send } from "lucide-react"
@@ -40,39 +42,15 @@ export default function SendMessage() {
             }
 
             // Добавляем новое сообщение в сообщения чата
-            setMessagesByChat((prev) => {
-                const currentChat = prev[activeChatId] || {
-                    items: [],
-                    loading: false,
-                    loaded: true
-                }
+            setMessagesByChat((prev) =>
+                addMessageToChat(prev, activeChatId, data.message)
+            )
 
-                return {
-                    ...prev,
-
-                    [activeChatId]: {
-                        ...currentChat,
-
-                        items: [
-                            ...currentChat.items,
-                            data.message
-                        ]
-                    }
-                }
-            })
-
-            // Обновляем последнее сообщение чата
+            // Обновляем последнее сообщение чата и время обновления на время сообщения
             setChatList((prev) =>
-                prev.map((chat) => {
-                    if (chat.id !== activeChatId) {
-                        return chat
-                    }
-
-                    return {
-                        ...chat,
-                        lastMessage: data.message,
-                        updatedAt: data.message.createdAt
-                    }
+                moveChatToTop(prev, activeChatId, {
+                    lastMessage: data.message,
+                    updatedAt: data.message.createdAt
                 })
             )
 

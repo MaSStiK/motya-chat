@@ -20,7 +20,9 @@ export default function ChatItem({ chat, active, onClick }) {
             <div className="flex-col chat-list__item-content">
                 <div className="flex-row gap-1 chat-list__item-row">
                     <span className="fs-large text-ellipsis">{chat.title}</span>
-                    <span className="fs-small text-brown chat-list__item-time">{formatChatDate(chat.lastMessage.createdAt)}</span>
+                    {chat.lastMessage &&
+                        <span className="fs-small text-brown chat-list__item-time">{formatChatDate(chat.lastMessage.createdAt)}</span>
+                    }
                 </div>
                 <div className="flex-row gap-2 chat-list__item-row">
                     <span className="fs-small text-brown text-ellipsis chat-list__item-message">{chat.lastMessage?.text || "Нет сообщений"}</span>

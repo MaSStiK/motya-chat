@@ -1,16 +1,23 @@
 import Chat from "@/lib/mongodb/models/Chat"
-import Message from "@/lib/mongodb/models/Message"
 import { chatPopulate } from "@/lib/mongodb/populates/chatPopulate"
 
 export async function createChat(data) {
     return Chat.create(data)
 }
 
-export async function updateChatLastMessage(chatId, messageId) {
-    return Chat.findByIdAndUpdate(chatId, {
-        lastMessage: messageId,
-        updatedAt: new Date()
-    })
+export async function updateChatLastMessage(chatId, messageId, updatedAt) {
+    return Chat.updateOne(
+        { _id: chatId },
+        {
+            $set: {
+                lastMessage: messageId,
+                updatedAt
+            }
+        },
+        {
+            timestamps: false
+        }
+    )
 }
 
 export async function updateChatReadState(chatId, userId) {
@@ -23,6 +30,9 @@ export async function updateChatReadState(chatId, userId) {
             $set: {
                 "readState.$.lastReadAt": new Date()
             }
+        },
+        {
+            timestamps: false
         }
     )
 }

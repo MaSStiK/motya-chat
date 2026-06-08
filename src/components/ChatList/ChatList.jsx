@@ -67,9 +67,13 @@ export default function ChatList() {
     if (error) return <ChatListFeedback text={error} />
     if (!chatList.length) return <ChatListFeedback text="Чаты не найдены" />
 
+    const sortedChatList = [...chatList].sort((a, b) => {
+        return new Date(b.updatedAt) - new Date(a.updatedAt)
+    })
+
     return (
         <div className="flex-col">
-            {chatList.map((chat) => (
+            {sortedChatList.map((chat) => (
                 <ChatItem
                     key={chat.id}
                     chat={chat}
