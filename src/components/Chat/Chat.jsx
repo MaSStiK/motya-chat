@@ -29,10 +29,14 @@ export default function Chat() {
         const handleKeyDown = (e) => {
             const tag = e.target.tagName
 
-            // Защита от срабатываний если активен тег input или textarea
-            if (tag === "INPUT" || tag === "TEXTAREA") return
-
             if (e.key === "Escape") {
+                // Защита от выхода из чата если активен тег input или textarea
+                if (tag === "INPUT" || tag === "TEXTAREA") {
+                    // Снимаем фокус с поля ввода
+                    e.target.blur()
+                    return
+                }
+
                 // Если есть выделенные сообщения - снимаем выделение, но не закрываем чат
                 if (selectedMessageIds.length > 0) {
                     clearSelectedMessages()
