@@ -59,6 +59,11 @@ export async function loginWithGoogle(code) {
         throw new Error("GOOGLE_EMAIL_MISSING")
     }
 
+    // Проверяем, что email подтвержден Google
+    if (!googleUser.verified_email) {
+        throw new Error("GOOGLE_EMAIL_NOT_VERIFIED")
+    }
+
     // Ищем пользователя по email
     let user = await findUserByEmail(email)
 

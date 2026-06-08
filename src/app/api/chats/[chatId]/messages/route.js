@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { getUserFromRequest } from "@/lib/getUserFromRequest"
 import isValidObjectId from "@/lib/validation/isValidObjectId"
 import { getChatMessages, sendMessage, deleteMessages } from "@/services/messageService"
+import MESSAGE_LIMITS from "@/lib/validation/messageLimits"
 
 export async function GET(req, { params }) {
     try {
@@ -67,21 +68,27 @@ export async function POST(req, { params }) {
         const body = await req.json()
         const { text } = body
 
-        // Проверяем, что текст сообщения передан
-        if (!text || !text.trim()) {
+        // Проверяем, что текст сообщения корректный
+        if (
+            typeof text !== "string" ||
+            !text.trim() ||
+            text.length > MESSAGE_LIMITS.message.max
+        ) {
             return NextResponse.json(
-                { message: "Не указан текст сообщения" },
+                { message: "Некорректный текст сообщения" },
                 { status: 400 }
             )
         }
 
         const { user, error } = await getUserFromRequest()
         if (error) return error
+        
+        const normalizedText = text.trim() 
 
         // Отправляем сообщение
         const message = await sendMessage({
             chatId,
-            text,
+            text: normalizedText,
             senderId: user.id
         })
 
