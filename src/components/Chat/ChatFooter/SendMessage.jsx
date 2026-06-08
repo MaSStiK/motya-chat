@@ -11,6 +11,7 @@ import { addMessageToChat } from "@/utils/messageUtils"
 import { moveChatToTop } from "@/utils/chatUtils"
 import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
+import MESSAGE_LIMITS from "@/lib/validation/messageLimits"
 import { Send } from "lucide-react"
 
 export default function SendMessage() {
@@ -128,6 +129,7 @@ export default function SendMessage() {
                 type="text"
                 placeholder="Сообщение..."
                 value={message}
+                maxLength={MESSAGE_LIMITS.message.max}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
                 width100

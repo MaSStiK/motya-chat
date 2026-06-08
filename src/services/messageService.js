@@ -65,7 +65,7 @@ export async function sendMessage({ chatId, text, senderId }) {
     const message = await createMessage({
         chat: chatId,
         sender: senderId,
-        text: text.trim()
+        text: text
     })
 
     // Обновляем чат

@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import MESSAGE_LIMITS from "@/lib/validation/messageLimits"
 
 const MessageSchema = new mongoose.Schema({
     chat: {
@@ -19,7 +20,7 @@ const MessageSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: 4000
+        maxlength: MESSAGE_LIMITS.message.max
     }
 }, {
     timestamps: true
