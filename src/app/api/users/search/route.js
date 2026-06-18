@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { getUserFromRequest } from "@/lib/getUserFromRequest"
 import { searchUserByUsername } from "@/services/userService"
+import { handleRouteError } from "@/lib/errors/handleRouteError"
 
 export async function GET(req) {
     try {
@@ -30,25 +31,6 @@ export async function GET(req) {
             { status: 200 }
         )
     } catch (error) {
-        if (error.message === "SELF_SEARCH") {
-            return NextResponse.json(
-                { message: "Нельзя создать чат с собой" },
-                { status: 400 }
-            )
-        }
-
-        if (error.message === "USER_NOT_FOUND") {
-            return NextResponse.json(
-                { message: "Пользователь не найден" },
-                { status: 404 }
-            )
-        }
-
-        console.error("Search user error:", error)
-
-        return NextResponse.json(
-            { message: "Ошибка сервера" },
-            { status: 500 }
-        )
+        return handleRouteError(error, "GET users/search error:")
     }
 }

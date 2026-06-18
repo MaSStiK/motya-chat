@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { validateRegistration } from "@/lib/validation/validateRegistration"
 import { setAuthCookie } from "@/lib/auth"
 import { registerUser } from "@/services/auth/registrationService"
+import { handleRouteError } from "@/lib/errors/handleRouteError"
 
 export async function POST(req) {
     try {
@@ -37,19 +38,6 @@ export async function POST(req) {
         setAuthCookie(response, token)
         return response
     } catch (error) {
-        // Обработка дубликата (уникальный email)
-        if (error.code === 11000 || error.message === "USER_ALREADY_EXISTS") {
-            return NextResponse.json(
-                { message: "Пользователь с таким email уже существует" },
-                { status: 409 }
-            )
-        }
-
-        console.error("Registration error:", error)
-
-        return NextResponse.json(
-            { message: "Ошибка сервера" },
-            { status: 500 }
-        )
+        return handleRouteError(error, "POST registration error:")
     }
 }

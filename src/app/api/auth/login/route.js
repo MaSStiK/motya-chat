@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { validateLogin } from "@/lib/validation/validateLogin"
 import { setAuthCookie } from "@/lib/auth"
 import { loginUser } from "@/services/auth/loginService"
+import { handleRouteError } from "@/lib/errors/handleRouteError"
 
 export async function POST(req) {
     try {
@@ -38,25 +39,6 @@ export async function POST(req) {
         setAuthCookie(response, token)
         return response
     } catch (error) {
-        if (error.message === "GOOGLE_ACCOUNT") {
-            return NextResponse.json(
-                { message: "Данный email зарегистрирован через Google" },
-                { status: 400 }
-            )
-        }
-
-        if (error.message === "INVALID_CREDENTIALS") {
-            return NextResponse.json(
-                { message: "Неверный email или пароль" },
-                { status: 401 }
-            )
-        }
-
-        console.error("Login error:", error)
-
-        return NextResponse.json(
-            { message: "Ошибка сервера" },
-            { status: 500 }
-        )
+        return handleRouteError(error, "POST login error:")
     }
 }

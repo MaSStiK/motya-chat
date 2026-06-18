@@ -4,7 +4,7 @@ import { removeAuthCookie } from "@/lib/auth"
 export async function POST() {
     const response = NextResponse.json(
         // TODO: "Вы вышли из аккаунта"
-        { message: "You have been logged out" },
+        { message: "Вы вышли из системы" },
         { status: 200 }
     )
 

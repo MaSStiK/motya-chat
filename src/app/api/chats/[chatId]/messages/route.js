@@ -3,6 +3,7 @@ import { getUserFromRequest } from "@/lib/getUserFromRequest"
 import isValidObjectId from "@/lib/validation/isValidObjectId"
 import { getChatMessages, sendMessage, deleteMessages } from "@/services/messageService"
 import MESSAGE_LIMITS from "@/lib/validation/messageLimits"
+import { handleRouteError } from "@/lib/errors/handleRouteError"
 
 export async function GET(req, { params }) {
     try {
@@ -30,26 +31,7 @@ export async function GET(req, { params }) {
             { status: 200 }
         )
     } catch (error) {
-        if (error.message === "CHAT_NOT_FOUND") {
-            return NextResponse.json(
-                { message: "Чат не найден" },
-                { status: 404 }
-            )
-        }
-
-        if (error.message === "CHAT_ACCESS_DENIED") {
-            return NextResponse.json(
-                { message: "Нет доступа к чату" },
-                { status: 403 }
-            )
-        }
-
-        console.error("Get messages error:", error)
-
-        return NextResponse.json(
-            { message: "Ошибка сервера" },
-            { status: 500 }
-        )
+        return handleRouteError(error, "GET messages error:")
     }
 }
 
@@ -97,26 +79,7 @@ export async function POST(req, { params }) {
             { status: 201 }
         )
     } catch (error) {
-        if (error.message === "CHAT_NOT_FOUND") {
-            return NextResponse.json(
-                { message: "Чат не найден" },
-                { status: 404 }
-            )
-        }
-
-        if (error.message === "CHAT_ACCESS_DENIED") {
-            return NextResponse.json(
-                { message: "Нет доступа к чату" },
-                { status: 403 }
-            )
-        }
-
-        console.error("Send message error:", error)
-
-        return NextResponse.json(
-            { message: "Ошибка сервера" },
-            { status: 500 }
-        )
+        return handleRouteError(error, "POST messages error:")
     }
 }
 
@@ -170,32 +133,6 @@ export async function DELETE(req, { params }) {
             { status: 200 }
         )
     } catch (error) {
-        if (error.message === "CHAT_NOT_FOUND") {
-            return NextResponse.json(
-                { message: "Чат не найден" },
-                { status: 404 }
-            )
-        }
-
-        if (error.message === "CHAT_ACCESS_DENIED") {
-            return NextResponse.json(
-                { message: "Нет доступа к чату" },
-                { status: 403 }
-            )
-        }
-
-        if (error.message === "MESSAGES_NOT_FOUND") {
-            return NextResponse.json(
-                { message: "Сообщения не найдены" },
-                { status: 404 }
-            )
-        }
-
-        console.error("Delete messages error:", error)
-
-        return NextResponse.json(
-            { message: "Ошибка сервера" },
-            { status: 500 }
-        )
+        return handleRouteError(error, "DELETE messages error:")
     }
 }

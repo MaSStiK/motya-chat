@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { getUserFromRequest } from "@/lib/getUserFromRequest"
 import isValidObjectId from "@/lib/validation/isValidObjectId"
 import { getUserChats, createPrivateChat } from "@/services/chatService"
+import { handleRouteError } from "@/lib/errors/handleRouteError"
 
 export async function GET() {
     try {
@@ -18,12 +19,7 @@ export async function GET() {
             { status: 200 }
         )
     } catch (error) {
-        console.error("Get chats error:", error)
-
-        return NextResponse.json(
-            { message: "Ошибка сервера" },
-            { status: 500 }
-        )
+        return handleRouteError(error, "GET chats error:")
     }
 }
 
@@ -61,25 +57,6 @@ export async function POST(req) {
             { status: result.isNew ? 201 : 200 }
         )
     } catch (error) {
-        if (error.message === "CHAT_WITH_SELF") {
-            return NextResponse.json(
-                { message: "Нельзя создать чат с самим собой" },
-                { status: 400 }
-            )
-        }
-
-        if (error.message === "USER_NOT_FOUND") {
-            return NextResponse.json(
-                { message: "Пользователь не найден" },
-                { status: 404 }
-            )
-        }
-
-        console.error("Create chat error:", error)
-
-        return NextResponse.json(
-            { message: "Ошибка сервера" },
-            { status: 500 }
-        )
+        return handleRouteError(error, "POST chats error:")
     }
 }
