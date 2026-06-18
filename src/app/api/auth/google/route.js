@@ -1,13 +1,18 @@
 import { NextResponse } from "next/server"
 import crypto from "crypto"
 
-export async function GET() {
+export async function GET(req) {
     // Генерируем случайный state для защиты от CSRF
     const state = crypto.randomBytes(32).toString("hex")
 
+    const redirectUri = new URL(
+        process.env.GOOGLE_REDIRECT_PATH,
+        req.url
+    ).toString()
+
     const params = new URLSearchParams({
         client_id: process.env.GOOGLE_CLIENT_ID,
-        redirect_uri: process.env.GOOGLE_REDIRECT_URI,
+        redirect_uri: redirectUri,
         response_type: "code",
 
         // Какие данные запрашиваем

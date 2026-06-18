@@ -3,7 +3,12 @@ import generateUsername from "@/utils/generateUsername"
 import { createUser, findUserByEmail } from "@/lib/mongodb/controllers/userController"
 import { createAuthToken } from "@/lib/auth"
 
-async function getGoogleTokens(code) {
+async function getGoogleTokens(url, code) {
+    const redirectUri = new URL(
+        process.env.GOOGLE_REDIRECT_PATH,
+        url
+    ).toString()
+
     const response = await fetch("https://oauth2.googleapis.com/token", {
         method: "POST",
         headers: {
@@ -13,7 +18,7 @@ async function getGoogleTokens(code) {
             code,
             client_id: process.env.GOOGLE_CLIENT_ID,
             client_secret: process.env.GOOGLE_CLIENT_SECRET,
-            redirect_uri: process.env.GOOGLE_REDIRECT_URI,
+            redirect_uri: redirectUri,
             grant_type: "authorization_code"
         })
     })
@@ -43,12 +48,12 @@ async function getGoogleUser(accessToken) {
     return data
 }
 
-export async function loginWithGoogle(code) {
+export async function loginWithGoogle(url, code) {
     // Подключаемся к MongoDB
     await MongoConnect()
 
     // Получаем токены Google
-    const tokens = await getGoogleTokens(code)
+    const tokens = await getGoogleTokens(url, code)
 
     // Получаем данные пользователя Google
     const googleUser = await getGoogleUser(tokens.access_token)

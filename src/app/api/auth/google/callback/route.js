@@ -34,7 +34,7 @@ export async function GET(req) {
         }
 
         // Авторизуем пользователя через Google
-        const { token } = await loginWithGoogle(code)
+        const { token } = await loginWithGoogle(req.url, code)
 
         const response = NextResponse.redirect(
             new URL("/", req.url)
