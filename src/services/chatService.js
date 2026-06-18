@@ -8,7 +8,14 @@ import {
 } from "@/lib/mongodb/controllers/chatController"
 import { countUnreadMessages } from "@/lib/mongodb/controllers/messageController"
 import { formatChat } from "@/lib/serialization/chat"
-import { getPrivateKey } from "@/utils/getPrivateKey"
+
+// Генерация privateKey для двух пользователей
+function getPrivateKey(userId1, userId2) {
+    return [userId1, userId2]
+        .map(id => id.toString())
+        .sort()
+        .join("_")
+}
 
 export async function getUserChats(userId) {
     // Подключаемся к MongoDB перед запросами к базе
