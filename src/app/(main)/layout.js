@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation"
+import JotaiProvider from "@/components/JotaiProvider"
 import AuthProvider from "@/components/Auth/AuthProvider"
 import Sidebar from "@/components/Sidebar/Sidebar"
 import getCurrentUser from "@/lib/getCurrentUser"
@@ -13,11 +14,13 @@ export default async function MainLayout({ children }) {
     if (!user) redirect("/auth")
 
     return (
-        <AuthProvider user={user}>
-            <div id="layout">
-                <Sidebar />
-                <main>{children}</main>
-            </div>
-        </AuthProvider>
+        <JotaiProvider>
+            <AuthProvider user={user}>
+                <div id="layout">
+                    <Sidebar />
+                    <main>{children}</main>
+                </div>
+            </AuthProvider>
+        </JotaiProvider>
     )
 }

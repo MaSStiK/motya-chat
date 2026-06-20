@@ -4,7 +4,6 @@ import { Check, CheckCheck } from "lucide-react"
 
 export default function ChatListStatus({ chat }) {
     const messageDrafts = useAtomValue(messageDraftsAtom)
-    console.log(messageDrafts);
 
     // Кол-во непрочитанных сообщений
     if (chat.unreadCount > 0) return <span className="fs-tiny text-white chat-list__badge">{chat.unreadCount}</span>
