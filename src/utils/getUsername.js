@@ -8,31 +8,21 @@ const tags = [
     "xray", "yankee", "zulu",
 
     "gamma", "epsilon", "iota", "kappa", "lambda",
-    "sigma", "upsilon", "six", "seven",
+    "sigma", "upsilon",
+    "zero", "six", "seven",
 
-    "pixel", "byte", "flux", "nexo", "volt",
-    "quark", "spark", "turbo",
+    "pixel", "byte", "flux", "volt",
+    "quark", "spark", 
 
-    "nova", "orbit", "astro", "luna",
-    "zero", "hyper",
+    "apple", "banana", "peach", "cherry", "mango", "kiwi",
+    "soda", "candy",
 
-    "yolo", "bento", "mojo", "candy",
-    "soda", "kiwi", "mango",
-
-    "super", "titan",
-
-    "vexo", "neo", "void", "robo",
-    "ninja", "dash", "mint",
-
-    "cosmo", "solar", "stellar", "comet",
-    "meteor", "plasma", "neutron", "galaxy",
-    "nebula", "eclipse", "saturn", "mars",
-    "venus", "apollo", "rocket", "ion",
-    "quantum",
-
-    "rush", "boost", "flash", "blaze",
-    "rapid", "nitro", "zoom", "drift",
-    "surge", "core", "pulse", "ghost", "zen"
+    "turbo", "hyper", "super", "ultra", "mega", "omega", "extra",
+    "fast", "nitro", "drift", "rush", "boost", "flash",
+    "shock", "charge", "vector", "jet",
+    
+    "nova", "orbit", "astro", "luna", "neo", "void",
+    "cosmo", "solar","comet", "meteor"
 ]
 
 // Возвращает никнейм в формате tag-tag-tag
