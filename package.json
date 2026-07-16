@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^1.13.3",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "color-hash": "^2.0.2",

@@ -1,52 +1,59 @@
+<p align="right">
+  <a href="./README.md">🇺🇸 English</a> |
+  <a href="./README-ru.md">🇷🇺 Русский</a> |
+  <a href="./README-fr.md">🇫🇷 Français</a>
+</p>
+
 # Red Chat (Next.js)
+**Red Chat** is a modern messaging platform inspired by Telegram.  
+It supports real-time messaging, user profiles, chats, and an extensible architecture designed for future development.
 
-**Red Chat** - это мессенджер, вдохновлённый функциональностью Telegram.  
-Поддерживает обмен сообщениями в реальном времени, пользовательские профили, чаты и расширяемую архитектуру для дальнейшего развития.
+> 🚧 Work in progress.
 
-Проект находится в активной разработке.
+## 🛠️ Tech Stack
 
-## 🛠️ Технологии
-- **Next.js** — основа приложения и роутинг
-- **React** — интерфейс приложения
-- **Axios** — выполнение HTTP-запросов
-- **bcryptjs** — хеширование и защита паролей
-- **clsx** — объединение CSS-классов
-- **color-hash** — генерация цветовых идентификаторов
-- **dayjs** — работа с датой и временем
-- **Jotai** — управление состоянием приложения
-- **jsonwebtoken** — работа с JWT-токенами
-- **lodash.debounce** — оптимизация событий и запросов
-- **lucide-react** — набор SVG-иконок
-- **MongoDB** — база данных проекта
-- **Mongoose** — ODM для MongoDB
-- **tinycolor2** — работа с цветами
-- **Zod** — валидация данных и схем
+### Frontend
+- **Next.js** - application framework and routing
+- **React** - user interface library
+- **Jotai** - application state management
+- **clsx** - conditional CSS class management
+- **dayjs** - date and time utilities
+- **lodash.debounce** - event and request optimization
+- **lucide-react** - SVG icon library
+- **color-hash** - deterministic color generation
+- **tinycolor2** - color manipulation utilities
 
+### Backend
+- **MongoDB** - primary project database
+- **Mongoose** - ODM for MongoDB
+- **bcryptjs** - password hashing and security
+- **jsonwebtoken** - JWT authentication
+- **Zod** - data and schema validation
 
-## 📸 Скриншоты сайта
+## 📸 Screenshots
 <table>
     <tr>
         <td align="center">
             <img width="500" alt="screenshot" src="https://github.com/user-attachments/assets/d44e4857-9b25-4f1c-b168-609307004132" />
             <br>
-            <p>Главная страница</p>
+            <p>Home page</p>
         </td>
         <td align="center">
             <img width="500" alt="screenshot" src="https://github.com/user-attachments/assets/fb08778b-cdf9-42dd-8e5f-379dd5b610c9" />
             <br>
-            <p>Открытый чат</p>
+            <p>Open chat</p>
         </td>
     </tr>
     <tr>
         <td align="center">
             <img width="500" alt="screenshot" src="https://github.com/user-attachments/assets/4c75a5ae-e642-4c18-ba93-d48991fcbc60" />
             <br>
-            <p>Страница входа</p>
+            <p>Login page</p>
         </td>
         <td align="center">
             <img width="500" alt="screenshot" src="https://github.com/user-attachments/assets/d9835916-4b5a-4232-a89e-f04993bae17d" />
             <br>
-            <p>Страница регистрации</p>
+            <p>Registration page</p>
         </td>
     </tr>
 </table>
