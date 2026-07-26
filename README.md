@@ -13,23 +13,23 @@ It supports real-time messaging, user profiles, chats, and an extensible archite
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Next.js** - application framework and routing
-- **React** - user interface library
-- **Jotai** - application state management
-- **clsx** - conditional CSS class management
-- **dayjs** - date and time utilities
-- **lodash.debounce** - event and request optimization
-- **lucide-react** - SVG icon library
-- **color-hash** - deterministic color generation
-- **tinycolor2** - color manipulation utilities
-- **Tippy.js** - Tooltips and interactive UI elements
+- **Next.js** - Application Framework and Routing
+- **React** - User Interface Library
+- **Jotai** - Application State Management
+- **clsx** - Conditional CSS Class Management
+- **dayjs** - Date and Time Utilities
+- **lodash.debounce** - Event and Request Optimization
+- **lucide-react** - SVG Icon Library
+- **color-hash** - Deterministic Color Generation
+- **tinycolor2** - Color Manipulation Utilities
+- **Radix UI** - Accessible UI Components
 
 ### Backend
-- **MongoDB** - primary project database
+- **MongoDB** - Primary Project Database
 - **Mongoose** - ODM for MongoDB
-- **bcryptjs** - password hashing and security
-- **jsonwebtoken** - JWT authentication
-- **Zod** - data and schema validation
+- **bcryptjs** - Password Hashing and Security
+- **jsonwebtoken** - JWT Authentication
+- **Zod** - Data and Schema Validation
 
 ## 📸 Screenshots
 <table>
