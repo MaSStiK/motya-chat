@@ -13,26 +13,25 @@ Elle prend en charge la messagerie en temps réel, les profils utilisateurs, les
 ## 🛠️ Stack technique
 
 ### Frontend
-* **Next.js** - framework principal et système de routage
-* **React** - bibliothèque d’interface utilisateur
-* **Jotai** - gestion de l’état de l’application
-* **clsx** - gestion conditionnelle des classes CSS
-* **dayjs** - gestion des dates et des heures
-* **lodash.debounce** - optimisation des événements et des requêtes
-* **lucide-react** - bibliothèque d’icônes SVG
-* **color-hash** - génération déterministe de couleurs
-* **tinycolor2** - outils de manipulation des couleurs
+- **Next.js** - framework principal et système de routage
+- **React** - bibliothèque d’interface utilisateur
+- **Jotai** - gestion de l’état de l’application
+- **clsx** - gestion conditionnelle des classes CSS
+- **dayjs** - gestion des dates et des heures
+- **lodash.debounce** - optimisation des événements et des requêtes
+- **lucide-react** - bibliothèque d’icônes SVG
+- **color-hash** - génération déterministe de couleurs
+- **tinycolor2** - outils de manipulation des couleurs
+- **Tippy.js** - Info-bulles et éléments interactifs
 
 ### Backend
-* **MongoDB** - base de données principale du projet
-* **Mongoose** - ODM pour MongoDB
-* **bcryptjs** - hachage et sécurisation des mots de passe
-* **jsonwebtoken** - authentification JWT
-* **Zod** - validation des données et des schémas
-
+- **MongoDB** - base de données principale du projet
+- **Mongoose** - ODM pour MongoDB
+- **bcryptjs** - hachage et sécurisation des mots de passe
+- **jsonwebtoken** - authentification JWT
+- **Zod** - validation des données et des schémas
 
 ## 📸 Captures d’écran
-
 <table>
     <tr>
         <td align="center">

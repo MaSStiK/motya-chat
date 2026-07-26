@@ -22,6 +22,7 @@ It supports real-time messaging, user profiles, chats, and an extensible archite
 - **lucide-react** - SVG icon library
 - **color-hash** - deterministic color generation
 - **tinycolor2** - color manipulation utilities
+- **Tippy.js** - Tooltips and interactive UI elements
 
 ### Backend
 - **MongoDB** - primary project database
