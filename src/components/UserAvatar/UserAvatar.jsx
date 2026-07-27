@@ -1,15 +1,15 @@
 import ColorHash from "color-hash"
 import tinycolor from "tinycolor2"
 
-import "./ProfileAvatar.css"
+import "./UserAvatar.css"
 
-export default function ProfileAvatar({ name, small=false }) {
+export default function UserAvatar({ name, small=false }) {
     const colorHash = new ColorHash()
     const bgColor = colorHash.hex(name) 
     const textColor = tinycolor(bgColor).isLight() ? "#000000" : "#ffffff"
 
     return (
-        <div className="profile-avatar"
+        <div className="user-avatar"
             style={{
                 "--bg-color": bgColor,
                 "--text-color": textColor
