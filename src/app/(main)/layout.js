@@ -10,7 +10,7 @@ import "./app-phone.css"
 export default async function MainLayout({ children }) {
     const user = await getCurrentUser()
 
-    // Если пользователь не авторизован редиректим его на страницу входа
+    // Если пользователь не авторизован redirect на страницу входа
     if (!user) redirect("/auth")
 
     return (

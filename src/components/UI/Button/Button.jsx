@@ -5,20 +5,22 @@ import { Loader2 } from "lucide-react"
 
 import "./Button.css"
 
-// Пример использования
-/* <Button
+/* Пример использования
+<Button
     className=""
     text="text"
     title="title"
     icon={Icon}
     alt="button-test"
-/> */
+/>
+*/
 
 // Кнопка с картинкой, но так же есть возможность отобразить текст после картинки
 export default function Button({
     id, className="", style,
     text, // Текст кнопки
     title, // Заголовок при наведении
+    ref,
 
     // Пропсы только для кнопки
     onClick, // Функция при клике
@@ -26,18 +28,21 @@ export default function Button({
     disabled,
 
     // Пропсы только для ссылки
-    href, target, rel, 
+    href, target, rel,
 
     // Пропсы для отображения картинки
     icon, alt="button-image", color="#FFFFFF",
-    
+
     // Модификаторы
     big,
     round,
     width100,
     atStart,
     phoneTextHide,
-    loading
+    loading,
+
+    // Остальные пропсы
+    ...props
 }) {
     // Добавляем стиль-модификатор перед передаваемыми классами
     const classes = clsx(
@@ -53,12 +58,23 @@ export default function Button({
         className
     )
 
-    const commonProps = { id, className: classes, style, title }
+    const commonProps = {
+        ...props,
+        ref,
+        id,
+        className: classes,
+        style,
+        title
+    }
 
     const Icon = loading
-        ? Loader2  // Если loading - картинка загрузки
-        : (typeof icon === "function" || typeof icon === "object" ? icon : null) // Если в icon передаем иконку из "lucide-react" - отображаем его как компонент
-    const src = typeof icon === "string" ? icon : null // Если в icon передаем ссылку на картинку - отображаем как Image src
+        ? Loader2 // Если loading - картинка загрузки
+        // Если в icon передаем иконку из "lucide-react" - отображаем его как компонент
+        : (typeof icon === "function" || typeof icon === "object" ? icon : null)
+
+    // Если в icon передаем ссылку на картинку - отображаем как Image src
+    const src = typeof icon === "string" ? icon : null
+
     const content = (
         <>
             {Icon && (
@@ -68,18 +84,27 @@ export default function Button({
                     className={loading ? "spin" : ""}
                 />
             )}
-            {src && <Image src={src} alt={alt} width={20} height={20} />}
+
+            {src && (
+                <Image
+                    src={src}
+                    alt={alt}
+                    width={20}
+                    height={20}
+                />
+            )}
+
             {text && <span>{text}</span>}
         </>
     )
-
 
     // Если прокинута ссылка - то возвращаем ссылку с классом кнопки
     if (href) {
         // Если ссылка внешняя - возвращаем просто тег a
         if (href.startsWith("http")) {
             return (
-                <a {...commonProps}
+                <a
+                    {...commonProps}
                     aria-disabled={disabled}
                     href={href}
                     target={target || "_blank"}
@@ -105,7 +130,7 @@ export default function Button({
     return (
         <button {...commonProps}
             type={type}
-            onClick={onClick} 
+            onClick={onClick}
             disabled={disabled || loading}
         >
             {content}
