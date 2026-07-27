@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { useAtomValue } from "jotai"
 import { messageDraftsAtom } from "@/atoms/store"
-import UserPreview from "@/components/UserPreview/UserPreview"
+import UserCard from "@/components/UserCard/UserCard"
 import ChatListStatus from "./ChatListStatus"
 import { formatChatDate } from "@/utils/formatDate"
 
@@ -20,7 +20,7 @@ export default function ChatItem({ chat, active, onClick }) {
             )}
             onClick={onClick}
         >   
-            <UserPreview
+            <UserCard
                 avatar={chat.title}
             />
 

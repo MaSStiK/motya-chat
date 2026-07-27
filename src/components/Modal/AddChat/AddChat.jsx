@@ -6,6 +6,7 @@ import { chatListAtom, activeChatAtom } from "@/atoms/store"
 import Button from "@/components/UI/Button/Button"
 import TextInput from "@/components/UI/Input/TextInput"
 import { AtSign, UserPlus } from "lucide-react"
+import UserCard from "@/components/UserCard/UserCard"
 
 import "./AddChat.css"
 
@@ -123,7 +124,13 @@ export default function AddChat({ onClose }) {
                         width100
                         big
                     />
-                    {(user && !searchError) && <span className="fs-small">Пользователь: {user.name}</span>}
+                    {(user && !searchError) && 
+                        <UserCard
+                            avatar={user.name}
+                            name={user.name}
+                            // TODO: subtext="Был недавно"
+                        />
+                    }
                 </div>
 
                 <div className="flex-row gap-5">

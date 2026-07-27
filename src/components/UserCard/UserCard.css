@@ -1,8 +1,9 @@
-.user-preview {
+.user-card {
     max-width: 100%;
     overflow: hidden;
 }
 
-.user-preview__content {
+.user-card__content {
     min-width: 0;
+    justify-content: center;
 }

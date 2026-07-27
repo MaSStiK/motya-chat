@@ -2,7 +2,7 @@
 import clsx from "clsx"
 import { useAtomValue } from "jotai"
 import { activeChatAtom, selectedMessageIdsAtom } from "@/atoms/store"
-import UserPreview from "@/components/UserPreview/UserPreview"
+import UserCard from "@/components/UserCard/UserCard"
 import Button from "@/components/UI/Button/Button"
 import { Trash2, Pencil } from "lucide-react"
 import {
@@ -34,7 +34,7 @@ export default function ChatHeader() {
     return (
         <div className={headerClassName}>
             <div className="chat-header__main">
-                <UserPreview
+                <UserCard
                     avatar={activeChat.title}
                     name={activeChat.title}
                     subtext={`@${activeChat.companion.username}`}
